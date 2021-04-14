@@ -6,21 +6,22 @@
 class revue : public ressource
 {
  private:
-    std::string titre;
-    std::string auteur;
-    int annee;
-    int nbr_pages;
-    std::string collection;
-    std::string resume;
-    std::string editeur;
-    int nbr_article;
-    
+  std::string titre;
+  std::string auteur;
+  int annee;
+  int nbr_pages;
+  std::string collection;
+  std::string resume;
+  std::string editeur;
+  int nbr_article;
+  
  public:
-    revue(std::string titre, std::string auteur, int annee, int nbr_pages, std::string collection, std::string resume, std::string editeur, int nbr_article);
-    
-    void info(void);
-    void infoDetail(void);
-    
+  cd(void);
+  revue(std::string titre, std::string auteur, int annee, int nbr_pages, std::string collection, std::string resume, std::string editeur, int nbr_article);
+  
+  void info(void);
+  void infoDetail(void);
+  
 };
 
 #endif
