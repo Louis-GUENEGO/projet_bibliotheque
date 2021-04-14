@@ -1,18 +1,12 @@
-#include <iostream>
-#include <string>
-//#include <ctime>
-//#include <cstring>
-//#include <fstream>
-
-//using  namespace  std ;
-
 #ifndef _RESSOURCE_H_
 #define _RESSOURCE_H_
 
+    #include <iostream>
+    #include <string>
 
-class ressource
-{
-  enum type{LIVRE, REVUE, CD, VHS, DVD, RESNUM};
-};
+    class ressource {
+        protected:
+            enum {LIVRE, REVUE, CD, VHS, DVD, RESNUM} type;
+    };
 
 #endif
