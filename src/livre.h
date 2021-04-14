@@ -5,20 +5,20 @@
 
 class livre : public ressource
 {
-private:
+ private:
     std::string titre;
     std::string auteur;
     int annee;
     int nbr_pages;
     std::string collection;
     std::string resume;
-
-public:
+    
+ public:
     livre(std::string titre, std::string auteur, int annee, int nbr_pages, std::string collection, std::string resume);
     
     void info(void);
     void infoDetail(void);
-
+    
 };
 
 #endif
