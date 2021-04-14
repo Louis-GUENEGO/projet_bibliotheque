@@ -9,7 +9,7 @@ int main (int argc, char * argv [] ){
 
 	list[0]->setTitre("bonjour");
 	list[0]->setAuteur("loulou");
-	list[0]->setDuree(30);
+	//list[0]->setDuree(30);
 	list[0]->info();
 
 

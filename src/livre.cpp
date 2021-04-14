@@ -21,10 +21,6 @@ livre::livre(std::string titre, std::string auteur, int annee, int nbrPages, std
     resume = resume;
 }
 
-void livre::setTitre (std::string _titre){
-    titre = _titre;
-}
-
 void livre::setAuteur (const char * _auteur){
     auteur = std::string(_auteur);
 }
@@ -44,10 +40,4 @@ void livre::setResume (const char * _resume){
 
 void livre::info(void){
     std::cout<< titre << ", " << auteur << std::endl;
-}
-
-
-// redéfinition des métodes inutiles
-void livre::setDuree (int duree){
-    std::cout << "/!\\ Commande ingnorée : vous avez essayé d'atribuer une durée à un livre" << std::endl;
 }

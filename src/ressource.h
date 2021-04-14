@@ -8,11 +8,11 @@
         public:
             ressource();
 
-            virtual void setTitre (std::string titre) = 0;
+            virtual void setTitre (std::string titre);
 
-            virtual void setAuteur (const char * auteur) = 0;
+            virtual void setAuteur (const char * auteur);
 
-            virtual void setDuree (int duree) = 0;
+            virtual void setDuree (int duree);
 
             virtual void info (void) = 0;
 

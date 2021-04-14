@@ -17,5 +17,5 @@ void dvd::setDuree (int _duree){
 }
 
 void dvd::info(void) {
-    
+
 }
