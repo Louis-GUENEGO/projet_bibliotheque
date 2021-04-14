@@ -8,9 +8,11 @@ int main (int argc, char * argv [] ){
 	list.push_back(new livre);
 
 	list[0]->setTitre("bonjour");
-	std::cout << list.size() << std::endl;
+	list[0]->setAuteur("loulou");
+	list[0]->setDuree(30);
+	list[0]->info();
+
 
 	list.pop_back();
-	std::cout << list.size() << std::endl;
 	return 0;
 }

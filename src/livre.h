@@ -18,13 +18,15 @@
         livre(std::string titre, std::string auteur, int annee, int nbr_pages, std::string collection, std::string resume);
 
         virtual void setTitre (std::string titre);
-        void setAuteur (const char * auteur);
+        virtual void setAuteur (const char * auteur);
         void setAnnee (int annee);
         void setNbrPages (int nbr_pages);
         void setCollection (const char * collection);
         void setResume (const char * resume);
 
-        void info(void);
+        virtual void setDuree (int duree);
+
+        virtual void info(void);
         void infoDetail(void);
     };
 
