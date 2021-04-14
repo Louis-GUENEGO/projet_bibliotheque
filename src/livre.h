@@ -6,10 +6,10 @@
     class livre : public ressource
     {
      private:
-        std::string titre;
+
         std::string auteur;
         int annee;
-        int nbr_pages;
+        int nbrPages;
         std::string collection;
         std::string resume;
 
@@ -17,7 +17,12 @@
         livre(void);
         livre(std::string titre, std::string auteur, int annee, int nbr_pages, std::string collection, std::string resume);
 
-        
+        virtual void setTitre (std::string titre);
+        void setAuteur (const char * auteur);
+        void setAnnee (int annee);
+        void setNbrPages (int nbr_pages);
+        void setCollection (const char * collection);
+        void setResume (const char * resume);
 
         void info(void);
         void infoDetail(void);

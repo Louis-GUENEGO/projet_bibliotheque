@@ -5,17 +5,39 @@ livre::livre(void){
     titre = std::string("(vide)");
     auteur = std::string("(vide)");
     annee = 0;
-    nbr_pages = 0;
+    nbrPages = 0;
     collection = std::string("(vide)");
     resume = std::string("(vide)");
 }
 
-livre::livre(std::string titre, std::string auteur, int annee, int nbr_pages, std::string collection, std::string resume){
+
+livre::livre(std::string titre, std::string auteur, int annee, int nbrPages, std::string collection, std::string resume){
     ressource::type = LIVRE;
     titre = titre;
     auteur = auteur;
     annee = annee;
-    nbr_pages = nbr_pages;
+    nbrPages = nbrPages;
     collection = collection;
     resume = resume;
+}
+
+
+void livre::setTitre (std::string _titre){
+    titre = _titre;
+}
+
+void livre::setAuteur (const char * _auteur){
+    auteur = std::string(_auteur);
+}
+void livre::setAnnee (int annee){
+    annee = annee;
+}
+void livre::setNbrPages (int nbrPages){
+    nbrPages = nbrPages;
+}
+void livre::setCollection (const char * _collection){
+    collection = std::string(_collection);
+}
+void livre::setResume (const char * _resume){
+    resume = std::string(_resume);
 }
