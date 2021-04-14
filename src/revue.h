@@ -14,14 +14,14 @@ class revue : public ressource
   std::string resume;
   std::string editeur;
   int nbr_article;
-  
+
  public:
-  cd(void);
+  revue(void);
   revue(std::string titre, std::string auteur, int annee, int nbr_pages, std::string collection, std::string resume, std::string editeur, int nbr_article);
-  
+
   void info(void);
   void infoDetail(void);
-  
+
 };
 
 #endif

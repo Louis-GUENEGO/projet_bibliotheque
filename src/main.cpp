@@ -1,11 +1,13 @@
 #include <iostream>
-#include <vector>
 #include "bibliotheque.h"
 
 int main (int argc, char * argv [] ){
 
 	std::vector <ressource *> list;
 
-	std::cout << "Hello World..." << std::endl;
+	list.push_back(new livre);
+	list.pop_back();
+
+	std::cout << list.size() << std::endl;
 	return 0;
 }

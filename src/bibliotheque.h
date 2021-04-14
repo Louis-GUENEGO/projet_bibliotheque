@@ -1,6 +1,8 @@
 #ifndef _BIBLIOTHEQUE_H_
 #define _BIBLIOTHEQUE_H_
 
+    #include <vector>
+
     #include "ressource.h"
 
     #include "livre.h"
