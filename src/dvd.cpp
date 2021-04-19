@@ -8,14 +8,10 @@ dvd::dvd(void){
     maison_prod = "(vide)";
 }
 
-void dvd::setTitre (std::string _titre){
-    titre = _titre;
-}
-
-void dvd::setDuree (int _duree){
+void dvd::setDuree (unsigned int _duree){
     duree = _duree;
 }
 
-void dvd::info(void) {
+void dvd::infoDetail(void) {
 
 }

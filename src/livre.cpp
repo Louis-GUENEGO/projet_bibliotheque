@@ -10,34 +10,25 @@ livre::livre(void){
     resume = std::string("(vide)");
 }
 
-
-livre::livre(std::string titre, std::string auteur, int annee, int nbrPages, std::string collection, std::string resume){
-    ressource::type = LIVRE;
-    titre = titre;
-    auteur = auteur;
-    annee = annee;
-    nbrPages = nbrPages;
-    collection = collection;
-    resume = resume;
+void livre::setAnnee (int _annee){
+    annee = _annee;
+}
+void livre::setNbrPages (unsigned int _nbrPages){
+    nbrPages = _nbrPages;
+}
+void livre::setCollection (std::string _collection){
+    collection = _collection;
+}
+void livre::setResume (std::string _resume){
+    resume = _resume;
 }
 
-void livre::setAuteur (const char * _auteur){
-    auteur = std::string(_auteur);
-}
-void livre::setAnnee (int annee){
-    annee = annee;
-}
-void livre::setNbrPages (int nbrPages){
-    nbrPages = nbrPages;
-}
-void livre::setCollection (const char * _collection){
-    collection = std::string(_collection);
-}
-void livre::setResume (const char * _resume){
-    resume = std::string(_resume);
-}
-
-
-void livre::info(void){
-    std::cout<< titre << ", " << auteur << std::endl;
+void livre::infoDetail(void){
+    std::cout << "Type : livre" << std::endl;
+    std::cout << "Titre : " << titre << std::endl;
+    std::cout << "Auteur : " << auteur << std::endl;
+    std::cout << "Année : " << annee << std::endl;
+    std::cout << "Nombre de pages : " << nbrPages << std::endl;
+    std::cout << "Collection : " << collection << std::endl;
+    std::cout << "Resumée : " << resume << std::endl << std::endl;
 }

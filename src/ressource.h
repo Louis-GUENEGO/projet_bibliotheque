@@ -4,21 +4,30 @@
     #include <iostream>
     #include <string>
 
+    enum typeRessource {LIVRE, REVUE, CD, VHS, DVD, RESNUM};
+
     class ressource {
         public:
             ressource();
 
+            // méthodes virtuelles communes
             virtual void setTitre (std::string titre);
+            virtual void setAuteur (std::string auteur);
+            virtual void info (void);
+            virtual void infoDetail (void);
 
-            virtual void setAuteur (const char * auteur);
+            // méthodes virtuelles Livres
+            virtual void setAnnee (int annee);
+            virtual void setNbrPages (unsigned int nbr_pages);
+            virtual void setCollection (std::string collection);
+            virtual void setResume (std::string resume);
 
-            virtual void setDuree (int duree);
-
-            virtual void info (void) = 0;
+            // méthodes virtuelles DVD
 
         protected:
-            enum {LIVRE, REVUE, CD, VHS, DVD, RESNUM} type;
+            typeRessource type;
             std::string titre;
+            std::string auteur;
     };
 
 #endif

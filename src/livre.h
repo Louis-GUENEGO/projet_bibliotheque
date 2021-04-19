@@ -3,28 +3,23 @@
 
     #include "ressource.h"
 
-    class livre : public ressource
-    {
-     private:
+    class livre : public ressource {
+        protected:
 
-        std::string auteur;
-        int annee;
-        int nbrPages;
-        std::string collection;
-        std::string resume;
+            int annee;
+            unsigned int nbrPages;
+            std::string collection;
+            std::string resume;
 
-     public:
-        livre(void);
-        livre(std::string titre, std::string auteur, int annee, int nbr_pages, std::string collection, std::string resume);
+        public:
+            livre(void);
 
-        virtual void setAuteur (const char * auteur);
-        void setAnnee (int annee);
-        void setNbrPages (int nbr_pages);
-        void setCollection (const char * collection);
-        void setResume (const char * resume);
+            virtual void setAnnee (int annee);
+            virtual void setNbrPages (unsigned int nbr_pages);
+            virtual void setCollection (std::string collection);
+            virtual void setResume (std::string resume);
 
-        virtual void info(void);
-        void infoDetail(void);
+            virtual void infoDetail (void);
     };
 
 #endif

@@ -1,26 +1,19 @@
-#include "ressource.h"
-
 #ifndef _RESNUM_H_
 #define _RESNUM_H_
 
-enum enumFichier{PDF, DOC, PPT, MP3, MP4};
+    #include "ressource.h"
 
-class resnum : public ressource
-{
- private:
-  std::string titre;
-  std::string auteur;
-  enumFichier fichier;
-  int taille_oct;
-  std::string chemin;
+    enum enumFichier{PDF, DOC, PPT, MP3, MP4};
 
- public:
-  resnum(void);
-  resnum(std::string titre, std::string auteur, enumFichier fichier, int taille_oct, std::string chemin);
+    class resnum : public ressource {
+        protected:
+            enumFichier fichier;
+            int taille_oct;
+            std::string chemin;
 
-  void info(void);
-  void infoDetail(void);
-
-};
+        public:
+            resnum(void);
+            void infoDetail(void);
+    };
 
 #endif
