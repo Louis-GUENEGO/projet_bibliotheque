@@ -15,7 +15,7 @@
             livre(void);
 
             virtual void setAnnee (int annee);
-            virtual void setNbrPages (unsigned int nbr_pages);
+            virtual void setNbrPages (unsigned int nbrPages);
             virtual void setCollection (std::string collection);
             virtual void setResume (std::string resume);
 

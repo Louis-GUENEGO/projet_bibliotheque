@@ -46,7 +46,7 @@ void ressource::infoDetail (void){
 void ressource::setAnnee (int annee){
     std::cout<< "/!\\ méthode non implémentée" << std::endl;
 }
-void ressource::setNbrPages (unsigned int nbr_pages){
+void ressource::setNbrPages (unsigned int nbrPages){
     std::cout<< "/!\\ méthode non implémentée" << std::endl;
 }
 void ressource::setCollection (std::string collection){
