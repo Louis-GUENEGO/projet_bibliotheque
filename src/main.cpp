@@ -3,8 +3,6 @@
 
 int main (int argc, char * argv [] ){
 
-
-
 	std::vector <ressource *> list;
 
 	// Test livre
@@ -34,6 +32,17 @@ int main (int argc, char * argv [] ){
 	list[1]->info();
 	std::cout << std::endl;
 	list[1]->infoDetail();
+
+	// Test VHS
+	list.push_back(new vhs);
+	list[2]->setTitre("Titre de la VHS");
+	list[2]->setAuteur("Auteur de la VHS");
+	list[2]->setDuree(42);
+	list[2]->setMaisonProd("Maison de production de la VHS");
+	std::cout << std::endl;
+	list[2]->info();
+	std::cout << std::endl;
+	list[2]->infoDetail();
 
 
 	std::cout << std::endl;

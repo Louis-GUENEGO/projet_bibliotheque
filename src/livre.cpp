@@ -1,9 +1,11 @@
 #include "livre.h"
 
 livre::livre(void){
-    ressource::type = LIVRE;
+    type = LIVRE;
+
     titre = std::string("(vide)");
     auteur = std::string("(vide)");
+
     annee = 0;
     nbrPages = 0;
     collection = std::string("(vide)");
@@ -24,9 +26,8 @@ void livre::setResume (std::string _resume){
 }
 
 void livre::infoDetail(void){
-    std::cout << "Type : livre" << std::endl;
-    std::cout << "Titre : " << titre << std::endl;
-    std::cout << "Auteur : " << auteur << std::endl;
+    ressource::infoDetail();
+
     std::cout << "Année : " << annee << std::endl;
     std::cout << "Nombre de pages : " << nbrPages << std::endl;
     std::cout << "Collection : " << collection << std::endl;

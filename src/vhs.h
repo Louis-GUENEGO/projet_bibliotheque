@@ -6,11 +6,15 @@
     class vhs : public ressource {
         protected:
             unsigned int duree;
-            std::string maison_prod;
+            std::string maisonProd;
 
         public:
             vhs(void);
-            void infoDetail(void);
+
+            virtual void setMaisonProd (std::string maisonProd);
+            virtual void setDuree (unsigned int duree);
+
+            virtual void infoDetail(void);
     };
 
 #endif

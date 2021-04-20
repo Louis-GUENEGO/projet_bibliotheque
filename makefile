@@ -1,7 +1,7 @@
 CC = g++
 CFLAGS = -Wall -Wextra
 LDFLAGS =
-OBJFILES = src/main.o src/livre.o src/ressource.o src/revue.o
+OBJFILES = src/main.o src/livre.o src/ressource.o src/revue.o src/vhs.o
 TARGET = exe
 
 all: $(TARGET)

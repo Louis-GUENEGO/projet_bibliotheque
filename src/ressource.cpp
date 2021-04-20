@@ -37,8 +37,35 @@ void ressource::info (void){
     }
     std::cout << titre << ", de " << auteur << std::endl;
 }
-void ressource::infoDetail (void){
-    std::cout<< "/!\\ méthode non implémentée" << std::endl;
+
+void ressource::infoDetail (void) {
+    switch (type){
+        case LIVRE:
+            std::cout << "Type : livre" << std::endl;
+            break;
+
+        case REVUE:
+            std::cout << "Type : Revue" << std::endl;
+            break;
+
+        case CD:
+            std::cout << "Type : CD" << std::endl;
+            break;
+
+        case VHS:
+            std::cout << "Type : VHS" << std::endl;
+            break;
+
+        case DVD:
+            std::cout << "Type : DVD" << std::endl;
+            break;
+
+        case RESNUM:
+            std::cout << "Type : Ressource numérique" << std::endl;
+            break;
+    }
+    std::cout << "Titre : " << titre << std::endl;
+    std::cout << "Auteur : " << auteur << std::endl;
 }
 
 
@@ -61,5 +88,13 @@ void ressource::setEditeur (std::string editeur){
     std::cout<< "/!\\ méthode non implémentée" << std::endl;
 }
 void ressource::setNbrArticles (unsigned int nrbArticles){
+    std::cout<< "/!\\ méthode non implémentée" << std::endl;
+}
+
+// vhs
+void ressource::setMaisonProd (std::string maisonProd){
+    std::cout<< "/!\\ méthode non implémentée" << std::endl;
+}
+void ressource::setDuree (unsigned int duree){
     std::cout<< "/!\\ méthode non implémentée" << std::endl;
 }

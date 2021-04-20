@@ -1,13 +1,16 @@
 #include "revue.h"
 
 revue::revue(void){
-    ressource::type = REVUE;
+    type = REVUE;
+
     titre = std::string("(vide)");
     auteur = std::string("(vide)");
+
     annee = 0;
     nbrPages = 0;
     collection = std::string("(vide)");
     resume = std::string("(vide)");
+
     editeur = std::string("(vide)");
     nrbArticles = 0;
 }

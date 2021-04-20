@@ -31,6 +31,10 @@
             // méthodes virtuelles revues
             virtual void setEditeur (std::string editeur);
             virtual void setNbrArticles (unsigned int nrbArticles);
+
+            // méthodes virtuelles VHS
+            virtual void setMaisonProd (std::string maisonProd);
+            virtual void setDuree (unsigned int duree);
     };
 
 #endif
