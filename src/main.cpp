@@ -58,10 +58,10 @@ int main (int argc, char * argv [] ){
 
 	// Test DVD
 	list.push_back(new dvd);
-	list[4]->setTitre("Titre de la VHS");
-	list[4]->setAuteur("Auteur de la VHS");
+	list[4]->setTitre("Titre du DVD");
+	list[4]->setAuteur("Auteur du DVD");
 	list[4]->setDuree(420);
-	list[4]->setMaisonProd("Maison de production de la VHS");
+	list[4]->setMaisonProd("Maison de production du DVD");
 	list[4]->setNbrChapitres(69);
 	std::cout << std::endl;
 	list[4]->info();
