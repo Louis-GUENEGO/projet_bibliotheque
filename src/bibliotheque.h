@@ -2,6 +2,7 @@
 #define _BIBLIOTHEQUE_H_
 
     #include <vector>
+    #include <iostream>
 
     #include "ressource.h"
 
@@ -11,5 +12,10 @@
     #include "vhs.h"
     #include "dvd.h"
     #include "resnum.h"
+
+    void ihm (void);
+    std::string lectureTerminal (void);
+    void addType (std::vector <ressource *> &list, std::string);
+    livre createLivre (void);
 
 #endif

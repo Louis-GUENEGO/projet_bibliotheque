@@ -1,8 +1,22 @@
-#include <iostream>
+
 #include "bibliotheque.h"
 
-int main (int argc, char * argv [] ){
+void testClass (void);
 
+
+
+int main (int argc, char * argv []) {
+
+	//testClass();
+
+	ihm();
+
+	return 0;
+}
+
+
+
+void testClass (void){
 	std::vector <ressource *> list;
 
 	// Test livre
@@ -81,5 +95,14 @@ int main (int argc, char * argv [] ){
 	list[5]->infoDetail();
 
 	std::cout << std::endl;
-	return 0;
+
+	/*
+	while (list.size() != 0) {
+		list.pop_back();
+	}
+
+	std::cout << list.size() << std::endl;
+	*/
+
+	return;
 }
