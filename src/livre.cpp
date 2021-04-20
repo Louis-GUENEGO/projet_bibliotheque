@@ -30,5 +30,5 @@ void livre::infoDetail(void){
     std::cout << "Année : " << annee << std::endl;
     std::cout << "Nombre de pages : " << nbrPages << std::endl;
     std::cout << "Collection : " << collection << std::endl;
-    std::cout << "Resumée : " << resume << std::endl << std::endl;
+    std::cout << "Resumée : " << resume << std::endl;
 }

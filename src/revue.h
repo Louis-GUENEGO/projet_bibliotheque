@@ -2,19 +2,20 @@
 #define _REVUE_H_
 
     #include "ressource.h"
+    #include "livre.h"
 
-    class revue : public ressource {
+    class revue : public livre {
         protected:
-            int annee;
-            unsigned int nbr_pages;
-            std::string collection;
-            std::string resume;
             std::string editeur;
-            unsigned int nbr_article;
+            unsigned int nrbArticles;
 
         public:
             revue(void);
-            void infoDetail(void);
+
+            virtual void setEditeur (std::string editeur);
+            virtual void setNbrArticles (unsigned int nrbArticles);
+
+            virtual void infoDetail(void);
     };
 
 #endif

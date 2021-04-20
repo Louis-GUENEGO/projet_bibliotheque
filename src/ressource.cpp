@@ -35,7 +35,7 @@ void ressource::info (void){
             std::cout << "Ressource numérique : ";
             break;
     }
-    std::cout << titre << ", de " << auteur << std::endl << std::endl;
+    std::cout << titre << ", de " << auteur << std::endl;
 }
 void ressource::infoDetail (void){
     std::cout<< "/!\\ méthode non implémentée" << std::endl;
@@ -53,5 +53,13 @@ void ressource::setCollection (std::string collection){
     std::cout<< "/!\\ méthode non implémentée" << std::endl;
 }
 void ressource::setResume (std::string resume){
+    std::cout<< "/!\\ méthode non implémentée" << std::endl;
+}
+
+// méthosdes virtueklles revues
+void ressource::setEditeur (std::string editeur){
+    std::cout<< "/!\\ méthode non implémentée" << std::endl;
+}
+void ressource::setNbrArticles (unsigned int nrbArticles){
     std::cout<< "/!\\ méthode non implémentée" << std::endl;
 }

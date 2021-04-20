@@ -7,6 +7,12 @@
     enum typeRessource {LIVRE, REVUE, CD, VHS, DVD, RESNUM};
 
     class ressource {
+
+        protected:
+            typeRessource type;
+            std::string titre;
+            std::string auteur;
+
         public:
             ressource();
 
@@ -22,12 +28,9 @@
             virtual void setCollection (std::string collection);
             virtual void setResume (std::string resume);
 
-            // méthodes virtuelles DVD
-
-        protected:
-            typeRessource type;
-            std::string titre;
-            std::string auteur;
+            // méthodes virtuelles revues
+            virtual void setEditeur (std::string editeur);
+            virtual void setNbrArticles (unsigned int nrbArticles);
     };
 
 #endif
