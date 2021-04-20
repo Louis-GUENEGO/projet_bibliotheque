@@ -41,6 +41,11 @@
 
             // méthodes virtuelles dvd
             virtual void setNbrChapitres (unsigned int nbrChapitres);
+
+            // méthodes virtuelles RESNUM
+            virtual void setFormat (std::string format);
+            virtual void setTaille (unsigned int taille);
+            virtual void setChemin (std::string chemin);
     };
 
 #endif

@@ -3,17 +3,18 @@
 
     #include "ressource.h"
 
-    enum enumFichier{PDF, DOC, PPT, MP3, MP4};
-
     class resnum : public ressource {
         protected:
-            enumFichier fichier;
-            int taille_oct;
+            std::string format;
+            unsigned int taille;
             std::string chemin;
 
         public:
             resnum(void);
-            void infoDetail(void);
+            virtual void setFormat (std::string format);
+            virtual void setTaille (unsigned int taille);
+            virtual void setChemin (std::string chemin);
+            virtual void infoDetail(void);
     };
 
 #endif

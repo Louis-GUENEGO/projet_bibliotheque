@@ -68,6 +68,18 @@ int main (int argc, char * argv [] ){
 	std::cout << std::endl;
 	list[4]->infoDetail();
 
+	// Test RESNUM
+	list.push_back(new resnum);
+	list[5]->setTitre("Titre de la ressource numérique");
+	list[5]->setAuteur("Auteur de la ressource numérique");
+	list[5]->setFormat(".format");
+	list[5]->setTaille(69);
+	list[5]->setChemin("https://www.chemin.fr/chemin");
+	std::cout << std::endl;
+	list[5]->info();
+	std::cout << std::endl;
+	list[5]->infoDetail();
+
 	std::cout << std::endl;
 	return 0;
 }

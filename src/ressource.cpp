@@ -108,3 +108,14 @@ void ressource::setNbrPiste (unsigned int nbrPistes){
 void ressource::setNbrChapitres (unsigned int nbrChapitres){
     std::cout<< "/!\\ méthode non implémentée" << std::endl;
 }
+
+//renum
+void ressource::setFormat (std::string format){
+    std::cout<< "/!\\ méthode non implémentée" << std::endl;
+}
+void ressource::setTaille (unsigned int taille){
+    std::cout<< "/!\\ méthode non implémentée" << std::endl;
+}
+void ressource::setChemin (std::string chemin){
+    std::cout<< "/!\\ méthode non implémentée" << std::endl;
+}
