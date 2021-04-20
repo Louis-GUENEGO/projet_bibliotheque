@@ -1,7 +1,6 @@
 #ifndef _REVUE_H_
 #define _REVUE_H_
 
-    #include "ressource.h"
     #include "livre.h"
 
     class revue : public livre {

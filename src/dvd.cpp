@@ -1,17 +1,21 @@
 #include "dvd.h"
 
-dvd::dvd(void){
-    titre = "(vide)";
+dvd::dvd(void) {
+    type = DVD;
+
+    titre = std::string("(vide)");
+    auteur = std::string("(vide)");
+
     duree = 0;
-    nbr_pistes = 0;
-    auteur = "(vide)";
-    maison_prod = "(vide)";
+    maisonProd = std::string("(vide)");
+
+    nbrChapitres = 0;
 }
 
-void dvd::setDuree (unsigned int _duree){
-    duree = _duree;
+void dvd::setNbrChapitres (unsigned int _nbrChapitres) {
+    nbrChapitres = _nbrChapitres;
 }
-
 void dvd::infoDetail(void) {
-
+    vhs::infoDetail();
+    std::cout << "Nombre de chapitres : " << nbrChapitres << std::endl;
 }

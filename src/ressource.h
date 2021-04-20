@@ -35,6 +35,12 @@
             // méthodes virtuelles VHS
             virtual void setMaisonProd (std::string maisonProd);
             virtual void setDuree (unsigned int duree);
+
+            // méthodes virtuelles CD
+            virtual void setNbrPiste (unsigned int nbrPistes);
+
+            // méthodes virtuelles dvd
+            virtual void setNbrChapitres (unsigned int nbrChapitres);
     };
 
 #endif

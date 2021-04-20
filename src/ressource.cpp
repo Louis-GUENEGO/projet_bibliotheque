@@ -98,3 +98,13 @@ void ressource::setMaisonProd (std::string maisonProd){
 void ressource::setDuree (unsigned int duree){
     std::cout<< "/!\\ méthode non implémentée" << std::endl;
 }
+
+//CD
+void ressource::setNbrPiste (unsigned int nbrPistes){
+    std::cout<< "/!\\ méthode non implémentée" << std::endl;
+}
+
+// dvd
+void ressource::setNbrChapitres (unsigned int nbrChapitres){
+    std::cout<< "/!\\ méthode non implémentée" << std::endl;
+}

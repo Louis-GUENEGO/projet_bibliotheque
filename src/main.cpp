@@ -44,6 +44,29 @@ int main (int argc, char * argv [] ){
 	std::cout << std::endl;
 	list[2]->infoDetail();
 
+	// Test CD
+	list.push_back(new cd);
+	list[3]->setTitre("Titre de la VHS");
+	list[3]->setAuteur("Auteur de la VHS");
+	list[3]->setDuree(42);
+	list[3]->setMaisonProd("Maison de production de la VHS");
+	list[3]->setNbrPiste(1337);
+	std::cout << std::endl;
+	list[3]->info();
+	std::cout << std::endl;
+	list[3]->infoDetail();
+
+	// Test DVD
+	list.push_back(new dvd);
+	list[4]->setTitre("Titre de la VHS");
+	list[4]->setAuteur("Auteur de la VHS");
+	list[4]->setDuree(420);
+	list[4]->setMaisonProd("Maison de production de la VHS");
+	list[4]->setNbrChapitres(69);
+	std::cout << std::endl;
+	list[4]->info();
+	std::cout << std::endl;
+	list[4]->infoDetail();
 
 	std::cout << std::endl;
 	return 0;

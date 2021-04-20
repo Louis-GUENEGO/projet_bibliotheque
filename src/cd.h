@@ -1,17 +1,16 @@
 #ifndef _CD_H_
 #define _CD_H_
 
-    #include "ressource.h"
+    #include "vhs.h"
 
-    class cd : public ressource {
+    class cd : public vhs {
         protected:
-            unsigned int duree;
-            unsigned int nbr_pistes;
-            std::string maison_prod;
+            unsigned int nbrPistes;
 
         public:
             cd(void);
-            virtual void infoDetail(void);
+            virtual void setNbrPiste (unsigned int nbrPistes);
+            virtual void infoDetail (void);
     };
 
 #endif
