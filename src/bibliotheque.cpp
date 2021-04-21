@@ -21,6 +21,10 @@ void ihm (void){
 
         std::cout << list.size() << " éléments dans la bibliothèque" << std::endl;
 
+        for (unsigned int i = 0; i < list.size() ; i++) {
+            list[i]->infoDetail();
+        }
+
     }
 
     return;
@@ -36,7 +40,6 @@ void addType (std::vector <ressource *> &list, std::string cmd) {
 
     if (cmd.size() == 9) {
         if ( (cmd.compare(4,5,"LIVRE")==0) || (cmd.compare(4,5,"livre")==0) ) {
-            std::cout << "création livre" << std::endl;
             livre * truc = new livre;
             *truc = createLivre();
             list.push_back( truc );
@@ -70,13 +73,24 @@ void addType (std::vector <ressource *> &list, std::string cmd) {
 
 livre createLivre (void){
 
+    int bufint;
+
     livre newLivre;
-	newLivre.setTitre("TitreDuLivre");
-	newLivre.setAuteur("AuteurDuLivre");
-	newLivre.setAnnee(420);
-	newLivre.setNbrPages(1337);
-	newLivre.setCollection("CollectionDuLivre");
-	newLivre.setResume("ResumeeDuLivre");
+    std::cout << "Veuillez renseigner le titre du livre" << std::endl;
+	newLivre.setTitre(lectureTerminal());
+    std::cout << "Veuillez renseigner l'auteur du livre" << std::endl;
+	newLivre.setAuteur(lectureTerminal());
+    std::cout << "Veuillez renseigner le nombre de pages" << std::endl;
+    bufint = stoul(lectureTerminal());
+    if (bufint >= 0) {
+        newLivre.setNbrPages(bufint);
+    }
+    std::cout << "Veuillez renseigner l'année de publication" << std::endl;
+    newLivre.setAnnee(stoi(lectureTerminal()));
+    std::cout << "Veuillez renseigner la collection du livre" << std::endl;
+	newLivre.setCollection(lectureTerminal());
+    std::cout << "Veuillez renseigner le résumé du livre" << std::endl;
+	newLivre.setResume(lectureTerminal());
 
     return newLivre;
 }
