@@ -5,6 +5,7 @@
     #include <iostream>
     #include <string>
     #include <cstdlib>
+    #include <fstream>
 
     #include "ressource.h"
 
@@ -28,4 +29,5 @@
     dvd createDVD (void);
     resnum createRESNUM (void);
 
+    livre lectureLivre(std::ifstream * monFichier);
 #endif

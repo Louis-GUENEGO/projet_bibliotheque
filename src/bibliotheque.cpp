@@ -88,15 +88,74 @@ void addType (std::vector <ressource *> &list, std::string cmd) {
 
 
 void loadBib (std::vector <ressource *> &list, std::string cmd) {
+  
+  list.clear();
+  std::cout << list.size() << std::endl;
+  
+  std::cout << "loading " << cmd.substr(5, cmd.size() - 5) << std::endl;
+  std::ifstream * monFichier;
+  monFichier->open(cmd.substr(5, cmd.size() - 5).c_str());
+  
+  std::string buff;
+  
+  while(!monFichier->eof())
+    {
+      
+      getline(*monFichier, buff);
+      if(buff.compare(0,4, "type") == 0)
+	{ 
+	  if(buff.compare(5, 5, "livre")==0)
+	    {
+	      livre * newLivre = new livre;
+	      * newLivre = lectureLivre(monFichier);
+	      list.push_back(newLivre);
+	    }
+	}	
+      
+    }
+  monFichier->close();
+  return;
+}	
 
-	list.clear();
-	std::cout << list.size() << std::endl;
 
-    std::cout << "loading " << cmd.substr(5, cmd.size() - 5) << std::endl;
-
-    return;
-}
-
+livre lectureLivre( std::ifstream * monFichier)
+  {
+    livre newLivre;
+    int pos;
+    std::string buff;
+    
+    do
+      {
+	getline(*monFichier, buff);
+	pos = buff.find('=') ;
+	
+	if(buff.compare(0, 5, "titre")==0)
+	  {
+	    newLivre.setTitre(buff.substr(pos + 1, buff.size() - (pos + 1)));
+	  }
+	else if (buff.compare(0, 6, "auteur")==0)
+	  {
+	    newLivre.setAuteur(buff.substr(pos + 1, buff.size() - (pos + 1)));
+	  }
+	else if (buff.compare(0, 5, "annee")==0)
+	  {
+	    newLivre.setAnnee(atoi(buff.substr(pos + 1, buff.size() - (pos + 1)).c_str()));
+	  }
+	else if (buff.compare(0, 8, "nbrPages")==0)
+	  {
+	    newLivre.setNbrPages((unsigned int)atoi(buff.substr(pos + 1, buff.size() - (pos + 1)).c_str()));
+	  }
+	else if(buff.compare(0, 10, "collection")==0)
+	  {
+	    newLivre.setCollection(buff.substr(pos + 1, buff.size() - (pos + 1)));
+	  }
+        else if(buff.compare(0, 6, "resume")==0)
+	  {
+	    newLivre.setResume(buff.substr(pos + 1, buff.size() - (pos + 1)));
+	  }
+     }while(buff.compare(0, 1, "\n")==0);
+     return newLivre;
+  }
 
 
 
