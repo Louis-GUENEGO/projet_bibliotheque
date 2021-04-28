@@ -17,7 +17,9 @@
 
     void ihm (void);
     std::string lectureTerminal (void);
-    void addType (std::vector <ressource *> &list, std::string);
+
+    void addType (std::vector <ressource *> &list, std::string cmd);
+    void loadBib (std::vector <ressource *> &list, std::string cmd);
 
     livre createLivre (void);
     revue createRevue (void);

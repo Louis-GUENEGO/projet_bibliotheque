@@ -19,6 +19,10 @@ void ihm (void){
             addType(list, cmd);
         }
 
+        if ( (cmd.compare(0,4,"LOAD")==0) || (cmd.compare(0,4,"load")==0) ) {
+            loadBib(list, cmd);
+        }
+
         std::cout << list.size() << " éléments dans la bibliothèque" << std::endl;
 
         for (unsigned int i = 0; i < list.size() ; i++) {
@@ -80,6 +84,38 @@ void addType (std::vector <ressource *> &list, std::string cmd) {
         return;
     }
 }
+
+
+
+void loadBib (std::vector <ressource *> &list, std::string cmd) {
+    std::cout << "loading " << cmd.substr(5, cmd.size() - 5) << std::endl;
+
+    return;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 livre createLivre (void){
 
