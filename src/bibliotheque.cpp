@@ -40,12 +40,14 @@ void addType (std::vector <ressource *> &list, std::string cmd) {
 
     if (cmd.size() == 9) {
         if ( (cmd.compare(4,5,"LIVRE")==0) || (cmd.compare(4,5,"livre")==0) ) {
-            livre * truc = new livre;
-            *truc = createLivre();
-            list.push_back( truc );
+            livre * nouvLivre = new livre;
+            * nouvLivre = createLivre();
+            list.push_back( nouvLivre );
 
         } else if ( (cmd.compare(4,5,"REVUE")==0) || (cmd.compare(4,5,"revue")==0) ) {
-            std::cout << "création revue" << std::endl;
+            revue * nouvRevue = new revue;
+            * nouvRevue = createRevue();
+            list.push_back( nouvRevue );
         }
 
     } else if (cmd.size() == 10) {
@@ -81,12 +83,12 @@ livre createLivre (void){
     std::cout << "Veuillez renseigner l'auteur du livre" << std::endl;
 	newLivre.setAuteur(lectureTerminal());
     std::cout << "Veuillez renseigner le nombre de pages" << std::endl;
-    bufint = std::stoul(lectureTerminal());
+    bufint = std::atoi(lectureTerminal().c_str());
     if (bufint >= 0) {
         newLivre.setNbrPages(bufint);
     }
     std::cout << "Veuillez renseigner l'année de publication" << std::endl;
-    newLivre.setAnnee(std::stoi(lectureTerminal()));
+    newLivre.setAnnee(std::atoi(lectureTerminal().c_str()));
     std::cout << "Veuillez renseigner la collection du livre" << std::endl;
 	newLivre.setCollection(lectureTerminal());
     std::cout << "Veuillez renseigner le résumé du livre" << std::endl;
@@ -94,3 +96,45 @@ livre createLivre (void){
 
     return newLivre;
 }
+
+revue createRevue (void){
+    int bufint;
+
+    revue newRevue;
+    std::cout << "Veuillez renseigner le titre de la revue" << std::endl;
+    newRevue.setTitre(lectureTerminal());
+    std::cout << "Veuillez renseigner l'auteur de la revue" << std::endl;
+    newRevue.setAuteur(lectureTerminal());
+    std::cout << "Veuillez renseigner le nombre de pages" << std::endl;
+    bufint = std::atoi(lectureTerminal().c_str());
+    if (bufint >= 0) {
+        newRevue.setNbrPages(bufint);
+    }
+    std::cout << "Veuillez renseigner l'année de publication" << std::endl;
+    newRevue.setAnnee(std::stoi(lectureTerminal()));
+    std::cout << "Veuillez renseigner la collection de la revue" << std::endl;
+    newRevue.setCollection(lectureTerminal());
+    std::cout << "Veuillez renseigner le résumé de la revue" << std::endl;
+    newRevue.setResume(lectureTerminal());
+
+    std::cout << "Veuillez renseigner l'éditeur de la revue" << std::endl;
+    newRevue.setEditeur(lectureTerminal());
+
+    std::cout << "Veuillez renseigner le nombre d'articles dans la revue" << std::endl;
+    bufint = std::atoi(lectureTerminal().c_str());
+    if (bufint >= 0) {
+        newRevue.setNbrArticles(bufint);
+    }
+
+    return newRevue;
+
+}
+
+
+
+
+
+vhs createVHS (void){}
+cd createCD (void){}
+dvd createDVD (void){}
+resnum createRESNUM (void){}
