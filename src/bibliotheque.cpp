@@ -111,7 +111,7 @@ revue createRevue (void){
         newRevue.setNbrPages(bufint);
     }
     std::cout << "Veuillez renseigner l'année de publication" << std::endl;
-    newRevue.setAnnee(std::stoi(lectureTerminal()));
+    newRevue.setAnnee(std::atoi(lectureTerminal().c_str()));
     std::cout << "Veuillez renseigner la collection de la revue" << std::endl;
     newRevue.setCollection(lectureTerminal());
     std::cout << "Veuillez renseigner le résumé de la revue" << std::endl;
