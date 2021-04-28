@@ -81,12 +81,12 @@ livre createLivre (void){
     std::cout << "Veuillez renseigner l'auteur du livre" << std::endl;
 	newLivre.setAuteur(lectureTerminal());
     std::cout << "Veuillez renseigner le nombre de pages" << std::endl;
-    bufint = stoul(lectureTerminal());
+    bufint = std::stoul(lectureTerminal());
     if (bufint >= 0) {
         newLivre.setNbrPages(bufint);
     }
     std::cout << "Veuillez renseigner l'année de publication" << std::endl;
-    newLivre.setAnnee(stoi(lectureTerminal()));
+    newLivre.setAnnee(std::stoi(lectureTerminal()));
     std::cout << "Veuillez renseigner la collection du livre" << std::endl;
 	newLivre.setCollection(lectureTerminal());
     std::cout << "Veuillez renseigner le résumé du livre" << std::endl;
