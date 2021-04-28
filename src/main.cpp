@@ -7,9 +7,9 @@ void testClass (void);
 
 int main (int argc, char * argv []) {
 
-	//testClass();
+	testClass();
 
-	ihm();
+	//ihm();
 
 	return 0;
 }
