@@ -88,6 +88,10 @@ void addType (std::vector <ressource *> &list, std::string cmd) {
 
 
 void loadBib (std::vector <ressource *> &list, std::string cmd) {
+
+	list.clear();
+	std::cout << list.size() << std::endl;
+
     std::cout << "loading " << cmd.substr(5, cmd.size() - 5) << std::endl;
 
     return;
