@@ -52,20 +52,28 @@ void addType (std::vector <ressource *> &list, std::string cmd) {
 
     } else if (cmd.size() == 10) {
         if ( (cmd.compare(4,6,"RESNUM")==0) || (cmd.compare(4,6,"resnum")==0) ) {
-            std::cout << "création ressource numérique" << std::endl;
+            resnum * nouvRESNUM = new resnum;
+            * nouvRESNUM = createRESNUM();
+            list.push_back( nouvRESNUM );
         }
 
     } else if (cmd.size() == 7) {
         if ( (cmd.compare(4,3,"VHS")==0) || (cmd.compare(4,3,"vhs")==0) ) {
-            std::cout << "création VHS" << std::endl;
+            vhs * nouvVHS = new vhs;
+            * nouvVHS = createVHS();
+            list.push_back( nouvVHS );
 
         } else if ( (cmd.compare(4,5,"DVD")==0) || (cmd.compare(4,5,"dvd")==0) ) {
-            std::cout << "création DVD" << std::endl;
+            dvd * nouvDVD = new dvd;
+            * nouvDVD = createDVD();
+            list.push_back( nouvDVD );
         }
 
     } else if (cmd.size() == 6) {
         if ( (cmd.compare(4,6,"CD")==0) || (cmd.compare(4,6,"cd")==0) ) {
-            std::cout << "création CD" << std::endl;
+            cd * nouvCD = new cd;
+            * nouvCD = createCD();
+            list.push_back( nouvCD );
         }
 
     } else {
@@ -134,7 +142,103 @@ revue createRevue (void){
 
 
 
-vhs createVHS (void){}
-cd createCD (void){}
-dvd createDVD (void){}
-resnum createRESNUM (void){}
+vhs createVHS (void){
+    int bufint;
+
+    vhs newVHS;
+    std::cout << "Veuillez renseigner le titre de la VHS" << std::endl;
+	newVHS.setTitre(lectureTerminal());
+    std::cout << "Veuillez renseigner l'auteur de la VHS" << std::endl;
+	newVHS.setAuteur(lectureTerminal());
+    std::cout << "Veuillez renseigner la maison de production de la VHS" << std::endl;
+	newVHS.setMaisonProd(lectureTerminal());
+
+    std::cout << "Veuillez renseigner la durée de la VHS" << std::endl;
+    bufint = std::atoi(lectureTerminal().c_str());
+    if (bufint >= 0) {
+        newVHS.setDuree(bufint);
+    }
+
+    return newVHS;
+
+}
+
+
+cd createCD (void){
+    int bufint;
+
+    cd newCD;
+    std::cout << "Veuillez renseigner le titre du CD" << std::endl;
+	newCD.setTitre(lectureTerminal());
+    std::cout << "Veuillez renseigner l'auteur du CD" << std::endl;
+	newCD.setAuteur(lectureTerminal());
+    std::cout << "Veuillez renseigner la maison de production du CD" << std::endl;
+	newCD.setMaisonProd(lectureTerminal());
+
+    std::cout << "Veuillez renseigner la durée du CD" << std::endl;
+    bufint = std::atoi(lectureTerminal().c_str());
+    if (bufint >= 0) {
+        newCD.setDuree(bufint);
+    }
+
+    std::cout << "Veuillez renseigner le nombre de pistes du CD" << std::endl;
+    bufint = std::atoi(lectureTerminal().c_str());
+    if (bufint >= 0) {
+        newCD.setNbrPiste(bufint);
+    }
+
+    return newCD;
+}
+
+
+dvd createDVD (void){
+    int bufint;
+
+    dvd newDVD;
+    std::cout << "Veuillez renseigner le titre du DVD" << std::endl;
+	newDVD.setTitre(lectureTerminal());
+    std::cout << "Veuillez renseigner l'auteur du DVD" << std::endl;
+	newDVD.setAuteur(lectureTerminal());
+    std::cout << "Veuillez renseigner la maison de production du DVD" << std::endl;
+	newDVD.setMaisonProd(lectureTerminal());
+
+    std::cout << "Veuillez renseigner la durée du DVD" << std::endl;
+    bufint = std::atoi(lectureTerminal().c_str());
+    if (bufint >= 0) {
+        newDVD.setDuree(bufint);
+    }
+
+    std::cout << "Veuillez renseigner le nombre de chapitres du DVD" << std::endl;
+    bufint = std::atoi(lectureTerminal().c_str());
+    if (bufint >= 0) {
+        newDVD.setNbrChapitres(bufint);
+    }
+
+    return newDVD;
+}
+
+
+resnum createRESNUM (void){
+    int bufint;
+
+    resnum newRESNUM;
+    std::cout << "Veuillez renseigner le titre de la ressource numérique" << std::endl;
+	newRESNUM.setTitre(lectureTerminal());
+    std::cout << "Veuillez renseigner l'auteur de la ressource numérique" << std::endl;
+	newRESNUM.setAuteur(lectureTerminal());
+
+    std::cout << "Veuillez renseigner le format de la ressource numérique" << std::endl;
+	newRESNUM.setFormat(lectureTerminal());
+
+    std::cout << "Veuillez renseigner la taille en octet de la ressource numérique" << std::endl;
+    bufint = std::atoi(lectureTerminal().c_str());
+    if (bufint >= 0) {
+        newRESNUM.setTaille(bufint);
+    }
+
+    std::cout << "Veuillez renseigner le chemin de la ressource numérique" << std::endl;
+	newRESNUM.setChemin(lectureTerminal());
+
+
+    return newRESNUM;
+}
