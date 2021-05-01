@@ -3,6 +3,8 @@
 
     #include <iostream>
     #include <string>
+    #include <cstdlib>
+    #include <fstream>
 
     enum typeRessource {LIVRE, REVUE, CD, VHS, DVD, RESNUM};
 
@@ -21,6 +23,7 @@
             virtual void setAuteur (std::string auteur);
             virtual void info (void);
             virtual void infoDetail (void);
+            virtual void lecture (std::ifstream * monFichier);
 
             // méthodes virtuelles Livres
             virtual void setAnnee (int annee);
@@ -46,6 +49,7 @@
             virtual void setFormat (std::string format);
             virtual void setTaille (unsigned int taille);
             virtual void setChemin (std::string chemin);
+
     };
 
 #endif

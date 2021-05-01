@@ -9,8 +9,9 @@
 
         public:
             dvd(void);
+            virtual void infoDetail (void);
+
             virtual void setNbrChapitres (unsigned int nbrChapitres);
-            virtual void infoDetail(void);
     };
 
 #endif

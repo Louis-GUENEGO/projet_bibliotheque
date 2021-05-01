@@ -34,5 +34,5 @@
     vhs     lectureVHS      (std::ifstream * monFichier);
     cd      lectureCD       (std::ifstream * monFichier);
     dvd     lectureDVD      (std::ifstream * monFichier);
-    resnum  lectureRESNUM   (std::ifstream * monFichier);
+
 #endif

@@ -67,6 +67,50 @@ void ressource::infoDetail (void) {
     std::cout << "Titre : " << titre << std::endl;
     std::cout << "Auteur : " << auteur << std::endl;
 }
+void ressource::lecture (std::ifstream * monFichier){
+    int pos;
+    std::string buff;
+
+    do {
+        getline(*monFichier, buff);
+        pos = buff.find('=') ;
+
+        if(buff.compare(0, 5, "titre")==0) {
+            this->setTitre(buff.substr(pos + 1, buff.size() - (pos + 1)));
+        } else if (buff.compare(0, 6, "auteur") == 0){
+            this->setAuteur(buff.substr(pos + 1, buff.size() - (pos + 1)));
+        } else if (buff.compare(0, 5, "duree") == 0){
+            this->setDuree((unsigned int)atoi(buff.substr(pos + 1, buff.size() - (pos + 1)).c_str()));
+        } else if (buff.compare(0, 10, "maisonProd") == 0){
+            this->setMaisonProd(buff.substr(pos + 1, buff.size() - (pos + 1)));
+        } else if (buff.compare(0, 9, "nbrPistes") == 0){
+            this->setNbrPiste((unsigned int)atoi(buff.substr(pos + 1, buff.size() - (pos + 1)).c_str()));
+        } else if (buff.compare(0, 6, "taille") == 0) {
+            this->setTaille((unsigned int)atoi(buff.substr(pos + 1, buff.size() - (pos + 1)).c_str()));
+        } else if (buff.compare(0, 6, "format") == 0) {
+            this->setFormat(buff.substr(pos + 1, buff.size() - (pos + 1)));
+        } else if (buff.compare(0, 6, "chemin") == 0) {
+            this->setChemin(buff.substr(pos + 1, buff.size() - (pos + 1)));
+        } else if (buff.compare(0, 12, "nbrChapitres") == 0){
+            this->setNbrChapitres((unsigned int)atoi(buff.substr(pos + 1, buff.size() - (pos + 1)).c_str()));
+        } else if (buff.compare(0, 8, "nbrPages") == 0){
+            this->setNbrPages((unsigned int)atoi( buff.substr(pos + 1, buff.size() - (pos + 1)).c_str() ));
+        } else if(buff.compare(0, 10, "collection") == 0){
+            this->setCollection(buff.substr(pos + 1, buff.size() - (pos + 1)));
+        } else if( buff.compare(0, 6, "resume") == 0){
+            this->setResume(buff.substr(pos + 1, buff.size() - (pos + 1)));
+        } else if( buff.compare(0, 7, "editeur") == 0){
+            this->setEditeur(buff.substr(pos + 1, buff.size() - (pos + 1)));
+        } else if( buff.compare(0, 11, "nbrArticles") == 0){
+            this->setNbrArticles( (unsigned int) atoi( buff.substr(pos + 1, buff.size() - (pos + 1)).c_str() ) );
+        } else if (buff.compare(0, 5, "annee") == 0) {
+            this->setAnnee( atoi(buff.substr(pos + 1, buff.size() - (pos + 1)).c_str() ) );
+        }
+
+    } while( buff.size() > 0);
+
+    return;
+}
 
 
 // méthodes virtuelles Livres (non implémentée dans ressource)
