@@ -1,5 +1,5 @@
 CC = g++
-CFLAGS = -Wall -Wextra
+CFLAGS = -Wall  -Wextra
 LDFLAGS =
 OBJFILES = src/main.o src/livre.o src/ressource.o src/revue.o src/vhs.o src/cd.o src/dvd.o src/resnum.o src/bibliotheque.o
 TARGET = exe
