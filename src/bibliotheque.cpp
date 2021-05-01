@@ -16,19 +16,20 @@ void ihm (void){
         }
 
         if ( (cmd.compare(0,3,"ADD")==0) || (cmd.compare(0,3,"add")==0) ) {
-            addType(list, cmd);
+            addType(&list, cmd);
         }
 
         if ( (cmd.compare(0,4,"LOAD")==0) || (cmd.compare(0,4,"load")==0) ) {
-            loadBib(list, cmd);
+            loadBib(&list, cmd);
         }
 
-        std::cout << list.size() << " éléments dans la bibliothèque" << std::endl;
+        std::cout << std::endl << list.size() << " éléments dans la bibliothèque" << std::endl;
 
         for (unsigned int i = 0; i < list.size() ; i++) {
+            std::cout << std::endl;
             list[i]->infoDetail();
         }
-
+        std::cout << std::endl;
     }
 
     return;
@@ -40,44 +41,45 @@ std::string lectureTerminal (void) {
     return chaine;
 }
 
-void addType (std::vector <ressource *> &list, std::string cmd) {
+void addType (std::vector <ressource *> * list, std::string cmd) {
 
     if (cmd.size() == 9) {
         if ( (cmd.compare(4,5,"LIVRE")==0) || (cmd.compare(4,5,"livre")==0) ) {
             livre * nouvLivre = new livre;
             * nouvLivre = createLivre();
-            list.push_back( nouvLivre );
+            list->push_back( nouvLivre );
+            //delete nouvLivre; // bien joué PD
 
         } else if ( (cmd.compare(4,5,"REVUE")==0) || (cmd.compare(4,5,"revue")==0) ) {
             revue * nouvRevue = new revue;
             * nouvRevue = createRevue();
-            list.push_back( nouvRevue );
+            list->push_back( nouvRevue );
         }
 
     } else if (cmd.size() == 10) {
         if ( (cmd.compare(4,6,"RESNUM")==0) || (cmd.compare(4,6,"resnum")==0) ) {
             resnum * nouvRESNUM = new resnum;
             * nouvRESNUM = createRESNUM();
-            list.push_back( nouvRESNUM );
+            list->push_back( nouvRESNUM );
         }
 
     } else if (cmd.size() == 7) {
         if ( (cmd.compare(4,3,"VHS")==0) || (cmd.compare(4,3,"vhs")==0) ) {
             vhs * nouvVHS = new vhs;
             * nouvVHS = createVHS();
-            list.push_back( nouvVHS );
+            list->push_back( nouvVHS );
 
         } else if ( (cmd.compare(4,5,"DVD")==0) || (cmd.compare(4,5,"dvd")==0) ) {
             dvd * nouvDVD = new dvd;
             * nouvDVD = createDVD();
-            list.push_back( nouvDVD );
+            list->push_back( nouvDVD );
         }
 
     } else if (cmd.size() == 6) {
         if ( (cmd.compare(4,6,"CD")==0) || (cmd.compare(4,6,"cd")==0) ) {
             cd * nouvCD = new cd;
             * nouvCD = createCD();
-            list.push_back( nouvCD );
+            list->push_back( nouvCD );
         }
 
     } else {
@@ -87,77 +89,224 @@ void addType (std::vector <ressource *> &list, std::string cmd) {
 
 
 
-void loadBib (std::vector <ressource *> &list, std::string cmd) {
-  
-  list.clear();
-  std::cout << list.size() << std::endl;
-  
-  std::cout << "loading " << cmd.substr(5, cmd.size() - 5) << std::endl;
-  std::ifstream * monFichier;
-  monFichier->open(cmd.substr(5, cmd.size() - 5).c_str());
-  
-  std::string buff;
-  
-  while(!monFichier->eof())
-    {
-      
-      getline(*monFichier, buff);
-      if(buff.compare(0,4, "type") == 0)
-	{ 
-	  if(buff.compare(5, 5, "livre")==0)
-	    {
-	      livre * newLivre = new livre;
-	      * newLivre = lectureLivre(monFichier);
-	      list.push_back(newLivre);
-	    }
-	}	
-      
+void loadBib (std::vector <ressource *> * list, std::string cmd) {
+
+    list->clear();
+    std::ifstream * monFichier = new std::ifstream;
+
+    monFichier->open ( cmd.substr(5, cmd.size() - 5).c_str() , std::fstream::in | std::fstream::out | std::fstream::app);
+
+    if ( monFichier->fail() ) {
+        std::cout << "impossible de lire \"" << cmd.substr(5, cmd.size() - 5) << "\"" << std::endl;
+    } else {
+
+        std::cout << "ouverture de \"" << cmd.substr(5, cmd.size() - 5) << "\"" << std::endl;
+
+        std::string buff;
+
+        while (!monFichier->eof()) {
+
+            getline(*monFichier, buff);
+
+            if (buff.compare(0,4, "type") == 0) {
+                if (buff.compare(5, 5, "livre") == 0) {
+                    livre * newLivre = new livre;
+                    * newLivre = lectureLivre(monFichier);
+                    list->push_back(newLivre);
+                } else if (buff.compare(5, 5, "revue") == 0) {
+                    revue * newRevue = new revue;
+                    * newRevue = lectureRevue(monFichier);
+                    list->push_back(newRevue);
+                } else if (buff.compare(5, 3, "vhs") == 0) {
+                    vhs * newVHS = new vhs;
+                    * newVHS = lectureVHS(monFichier);
+                    list->push_back(newVHS);
+                } else if (buff.compare(5, 2, "cd") == 0) {
+                    cd * newCD = new cd;
+                    * newCD = lectureCD(monFichier);
+                    list->push_back(newCD);
+                } else if (buff.compare(5, 3, "dvd") == 0) {
+                    dvd * newDVD = new dvd;
+                    * newDVD = lectureDVD(monFichier);
+                    list->push_back(newDVD);
+                } else if (buff.compare(5, 6, "resnum") == 0) {
+                    resnum * newRESNUM = new resnum;
+                    * newRESNUM = lectureRESNUM(monFichier);
+                    list->push_back(newRESNUM);
+                }
+            }
+        }
     }
-  monFichier->close();
-  return;
-}	
+
+    monFichier->close();
+    delete monFichier;
+
+    return;
+}
 
 
-livre lectureLivre( std::ifstream * monFichier)
-  {
+livre lectureLivre( std::ifstream * monFichier) {
+
     livre newLivre;
     int pos;
     std::string buff;
-    
-    do
-      {
-	getline(*monFichier, buff);
-	pos = buff.find('=') ;
-	
-	if(buff.compare(0, 5, "titre")==0)
-	  {
-	    newLivre.setTitre(buff.substr(pos + 1, buff.size() - (pos + 1)));
-	  }
-	else if (buff.compare(0, 6, "auteur")==0)
-	  {
-	    newLivre.setAuteur(buff.substr(pos + 1, buff.size() - (pos + 1)));
-	  }
-	else if (buff.compare(0, 5, "annee")==0)
-	  {
-	    newLivre.setAnnee(atoi(buff.substr(pos + 1, buff.size() - (pos + 1)).c_str()));
-	  }
-	else if (buff.compare(0, 8, "nbrPages")==0)
-	  {
-	    newLivre.setNbrPages((unsigned int)atoi(buff.substr(pos + 1, buff.size() - (pos + 1)).c_str()));
-	  }
-	else if(buff.compare(0, 10, "collection")==0)
-	  {
-	    newLivre.setCollection(buff.substr(pos + 1, buff.size() - (pos + 1)));
-	  }
-        else if(buff.compare(0, 6, "resume")==0)
-	  {
-	    newLivre.setResume(buff.substr(pos + 1, buff.size() - (pos + 1)));
-	  }
-     }while(buff.compare(0, 1, "\n")==0);
-     return newLivre;
-  }
 
+    do {
+        getline(*monFichier, buff);
+        pos = buff.find('=') ;
 
+        if(buff.compare(0, 5, "titre")==0) {
+            newLivre.setTitre(buff.substr(pos + 1, buff.size() - (pos + 1)));
+        } else if (buff.compare(0, 6, "auteur") == 0){
+            newLivre.setAuteur(buff.substr(pos + 1, buff.size() - (pos + 1)));
+        } else if (buff.compare(0, 5, "annee") == 0){
+            newLivre.setAnnee(atoi(buff.substr(pos + 1, buff.size() - (pos + 1)).c_str()));
+        } else if (buff.compare(0, 8, "nbrPages") == 0){
+            newLivre.setNbrPages((unsigned int)atoi(buff.substr(pos + 1, buff.size() - (pos + 1)).c_str()));
+        } else if(buff.compare(0, 10, "collection") == 0){
+            newLivre.setCollection(buff.substr(pos + 1, buff.size() - (pos + 1)));
+        } else if( buff.compare(0, 6, "resume") == 0){
+            newLivre.setResume(buff.substr(pos + 1, buff.size() - (pos + 1)));
+        }
+
+    } while( buff.size() > 0);
+
+    return newLivre;
+}
+
+revue lectureRevue (std::ifstream * monFichier){
+    revue newRevue;
+    int pos;
+    std::string buff;
+
+    do {
+        getline(*monFichier, buff);
+        pos = buff.find('=') ;
+
+        if(buff.compare(0, 5, "titre")==0) {
+            newRevue.setTitre(buff.substr(pos + 1, buff.size() - (pos + 1)));
+        } else if (buff.compare(0, 6, "auteur") == 0){
+            newRevue.setAuteur(buff.substr(pos + 1, buff.size() - (pos + 1)));
+        } else if (buff.compare(0, 5, "annee") == 0){
+            newRevue.setAnnee(atoi( buff.substr(pos + 1, buff.size() - (pos + 1)).c_str() ));
+        } else if (buff.compare(0, 8, "nbrPages") == 0){
+            newRevue.setNbrPages((unsigned int)atoi( buff.substr(pos + 1, buff.size() - (pos + 1)).c_str() ));
+        } else if(buff.compare(0, 10, "collection") == 0){
+            newRevue.setCollection(buff.substr(pos + 1, buff.size() - (pos + 1)));
+        } else if( buff.compare(0, 6, "resume") == 0){
+            newRevue.setResume(buff.substr(pos + 1, buff.size() - (pos + 1)));
+        } else if( buff.compare(0, 7, "editeur") == 0){
+            newRevue.setEditeur(buff.substr(pos + 1, buff.size() - (pos + 1)));
+        } else if( buff.compare(0, 11, "nbrArticles") == 0){
+            newRevue.setNbrArticles( (unsigned int) atoi( buff.substr(pos + 1, buff.size() - (pos + 1)).c_str() ) );
+        }
+
+    } while( buff.size() > 0);
+
+    return newRevue;
+}
+
+vhs lectureVHS (std::ifstream * monFichier){
+    vhs newVHS;
+    int pos;
+    std::string buff;
+
+    do {
+        getline(*monFichier, buff);
+        pos = buff.find('=') ;
+
+        if(buff.compare(0, 5, "titre")==0) {
+            newVHS.setTitre(buff.substr(pos + 1, buff.size() - (pos + 1)));
+        } else if (buff.compare(0, 6, "auteur") == 0){
+            newVHS.setAuteur(buff.substr(pos + 1, buff.size() - (pos + 1)));
+        } else if (buff.compare(0, 5, "duree") == 0){
+            newVHS.setDuree((unsigned int)atoi(buff.substr(pos + 1, buff.size() - (pos + 1)).c_str()));
+        } else if (buff.compare(0, 10, "maisonProd") == 0){
+            newVHS.setMaisonProd(buff.substr(pos + 1, buff.size() - (pos + 1)));
+        }
+
+    } while( buff.size() > 0);
+
+    return newVHS;
+}
+
+cd lectureCD (std::ifstream * monFichier) {
+    cd newCD;
+    int pos;
+    std::string buff;
+
+    do {
+        getline(*monFichier, buff);
+        pos = buff.find('=') ;
+
+        if(buff.compare(0, 5, "titre")==0) {
+            newCD.setTitre(buff.substr(pos + 1, buff.size() - (pos + 1)));
+        } else if (buff.compare(0, 6, "auteur") == 0){
+            newCD.setAuteur(buff.substr(pos + 1, buff.size() - (pos + 1)));
+        } else if (buff.compare(0, 5, "duree") == 0){
+            newCD.setDuree((unsigned int)atoi(buff.substr(pos + 1, buff.size() - (pos + 1)).c_str()));
+        } else if (buff.compare(0, 10, "maisonProd") == 0){
+            newCD.setMaisonProd(buff.substr(pos + 1, buff.size() - (pos + 1)));
+        } else if (buff.compare(0, 9, "nbrPistes") == 0){
+            newCD.setNbrPiste((unsigned int)atoi(buff.substr(pos + 1, buff.size() - (pos + 1)).c_str()));
+        }
+
+    } while( buff.size() > 0);
+
+    return newCD;
+}
+
+dvd lectureDVD (std::ifstream * monFichier) {
+    dvd newDVD;
+    int pos;
+    std::string buff;
+
+    do {
+        getline(*monFichier, buff);
+        pos = buff.find('=') ;
+
+        if(buff.compare(0, 5, "titre")==0) {
+            newDVD.setTitre(buff.substr(pos + 1, buff.size() - (pos + 1)));
+        } else if (buff.compare(0, 6, "auteur") == 0){
+            newDVD.setAuteur(buff.substr(pos + 1, buff.size() - (pos + 1)));
+        } else if (buff.compare(0, 5, "duree") == 0){
+            newDVD.setDuree((unsigned int)atoi(buff.substr(pos + 1, buff.size() - (pos + 1)).c_str()));
+        } else if (buff.compare(0, 10, "maisonProd") == 0){
+            newDVD.setMaisonProd(buff.substr(pos + 1, buff.size() - (pos + 1)));
+        } else if (buff.compare(0, 12, "nbrChapitres") == 0){
+            newDVD.setNbrChapitres((unsigned int)atoi(buff.substr(pos + 1, buff.size() - (pos + 1)).c_str()));
+        }
+
+    } while (buff.size() > 0);
+
+    return newDVD;
+}
+
+resnum lectureRESNUM (std::ifstream * monFichier) {
+    resnum newRESNUM;
+    int pos;
+    std::string buff;
+
+    do {
+        getline(*monFichier, buff);
+        pos = buff.find('=') ;
+
+        if(buff.compare(0, 5, "titre")==0) {
+            newRESNUM.setTitre(buff.substr(pos + 1, buff.size() - (pos + 1)));
+        } else if (buff.compare(0, 6, "auteur") == 0) {
+            newRESNUM.setAuteur(buff.substr(pos + 1, buff.size() - (pos + 1)));
+        } else if (buff.compare(0, 6, "taille") == 0) {
+            newRESNUM.setTaille((unsigned int)atoi(buff.substr(pos + 1, buff.size() - (pos + 1)).c_str()));
+        } else if (buff.compare(0, 6, "format") == 0) {
+            newRESNUM.setFormat(buff.substr(pos + 1, buff.size() - (pos + 1)));
+        } else if (buff.compare(0, 6, "chemin") == 0) {
+            newRESNUM.setChemin(buff.substr(pos + 1, buff.size() - (pos + 1)));
+        }
+
+    } while (buff.size() > 0);
+
+    return newRESNUM;
+}
 
 
 

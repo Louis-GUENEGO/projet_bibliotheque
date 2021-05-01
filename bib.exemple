@@ -1,0 +1,46 @@
+
+type=livre
+titre=titre du livre
+auteur=auteurdulivre
+resume=Voici le résumé du livre
+collection=colection du livre
+nbrPages=420
+annee=-42
+
+type=revue
+titre=titre de la revue
+auteur=auteur de la revue
+resume=Voici le résumé de la revue
+collection=colection de la revue
+nbrPages=420
+annee=-42
+editeur=éditeur de la revue
+nbrArticles=1337
+
+
+type=vhs
+titre=titre de la VHS
+auteur=auteur de la VHS
+duree=256
+maisonProd=maison de production de la VHS
+
+type=cd
+titre=titre du CD
+auteur=auteur du CD
+duree=4968
+maisonProd=maison de production du CD
+nbrPistes=698
+
+type=dvd
+titre=titre du DVD
+auteur=auteur du DVD
+duree=999
+maisonProd=maison de production du DVD
+nbrChapitres=111
+
+type=resnum
+titre=titre de la ressource numérique
+auteur=auteur de la ressource numérique
+taille=386
+format=.pdf
+chemin=https://www.lien-internet.fr/
