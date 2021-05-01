@@ -33,3 +33,32 @@ void livre::infoDetail(void){
     std::cout << "Collection : " << collection << std::endl;
     std::cout << "Resumée : " << resume << std::endl;
 }
+
+void livre::create (void){
+    int bufint;
+    std::string chaine;
+
+    std::cout << "Veuillez renseigner le titre du livre" << std::endl;
+    getline (std::cin, chaine);
+	this->setTitre(chaine);
+    std::cout << "Veuillez renseigner l'auteur du livre" << std::endl;
+    getline (std::cin, chaine);
+	this->setAuteur(chaine);
+    std::cout << "Veuillez renseigner le nombre de pages" << std::endl;
+    getline (std::cin, chaine);
+    bufint = std::atoi(chaine.c_str());
+    if (bufint >= 0) {
+        this->setNbrPages(bufint);
+    }
+    std::cout << "Veuillez renseigner l'année de publication" << std::endl;
+    getline (std::cin, chaine);
+    this->setAnnee(std::atoi(chaine.c_str()));
+    std::cout << "Veuillez renseigner la collection du livre" << std::endl;
+    getline (std::cin, chaine);
+	this->setCollection(chaine);
+    std::cout << "Veuillez renseigner le résumé du livre" << std::endl;
+    getline (std::cin, chaine);
+	this->setResume(chaine);
+
+    return;
+}

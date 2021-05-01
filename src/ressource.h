@@ -24,6 +24,7 @@
             virtual void info (void);
             virtual void infoDetail (void);
             virtual void lecture (std::ifstream * monFichier);
+            virtual void create (void);
 
             // méthodes virtuelles Livres
             virtual void setAnnee (int annee);

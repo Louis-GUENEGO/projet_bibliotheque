@@ -15,6 +15,7 @@
             virtual void setDuree (unsigned int duree);
 
             virtual void infoDetail(void);
+            virtual void create (void);
     };
 
 #endif

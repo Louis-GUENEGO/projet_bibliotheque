@@ -11,6 +11,8 @@
             cd(void);
             virtual void setNbrPiste (unsigned int nbrPistes);
             virtual void infoDetail (void);
+
+            virtual void create (void);
     };
 
 #endif

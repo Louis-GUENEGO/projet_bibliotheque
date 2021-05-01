@@ -12,6 +12,8 @@
             virtual void infoDetail (void);
 
             virtual void setNbrChapitres (unsigned int nbrChapitres);
+
+            virtual void create (void);
     };
 
 #endif

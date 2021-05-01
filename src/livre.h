@@ -20,6 +20,7 @@
             virtual void setResume (std::string resume);
 
             virtual void infoDetail (void);
+            virtual void create (void);
     };
 
 #endif

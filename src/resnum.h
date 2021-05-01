@@ -15,6 +15,8 @@
             virtual void setTaille (unsigned int taille);
             virtual void setChemin (std::string chemin);
             virtual void infoDetail(void);
+
+            virtual void create (void);
     };
 
 #endif

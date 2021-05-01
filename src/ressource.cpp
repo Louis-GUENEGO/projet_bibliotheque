@@ -67,6 +67,7 @@ void ressource::infoDetail (void) {
     std::cout << "Titre : " << titre << std::endl;
     std::cout << "Auteur : " << auteur << std::endl;
 }
+
 void ressource::lecture (std::ifstream * monFichier){
     int pos;
     std::string buff;
@@ -111,6 +112,10 @@ void ressource::lecture (std::ifstream * monFichier){
 
     return;
 }
+void ressource::create (void){
+    std::cout<< "/!\\ méthode non implémentée" << std::endl;
+}
+
 
 
 // méthodes virtuelles Livres (non implémentée dans ressource)

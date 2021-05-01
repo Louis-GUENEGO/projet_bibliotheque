@@ -15,6 +15,7 @@
             virtual void setNbrArticles (unsigned int nrbArticles);
 
             virtual void infoDetail(void);
+            virtual void create (void);
     };
 
 #endif
