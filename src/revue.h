@@ -6,7 +6,7 @@
     class revue : public livre {
         protected:
             std::string editeur;
-            unsigned int nrbArticles;
+            unsigned int nbrArticles;
 
         public:
             revue(void);
@@ -16,6 +16,7 @@
 
             virtual void infoDetail(void);
             virtual void create (void);
+            virtual void save (std::ofstream * monFichier);
     };
 
 #endif

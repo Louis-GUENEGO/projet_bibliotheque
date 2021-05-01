@@ -18,7 +18,9 @@
 
     void ihm (void);
 
-    void addType (std::vector <ressource *> * list, std::string cmd);
-    void loadBib (std::vector <ressource *> * list, std::string cmd);
+    void addType  (std::vector <ressource *> * list, std::string cmd);
+    void loadBib  (std::vector <ressource *> * list, std::string cmd);
+    void saveBib  (std::vector <ressource *> * list, std::string cmd);
+    void resetBib (std::vector <ressource *> * list);
 
 #endif

@@ -62,3 +62,16 @@ void livre::create (void){
 
     return;
 }
+
+void livre::save (std::ofstream * monFichier){
+
+    *monFichier << "type=livre"                      << "\n";
+    *monFichier << "titre="      << this->titre      << "\n";
+    *monFichier << "auteur="     << this->auteur     << "\n";
+    *monFichier << "resume="     << this->resume     << "\n";
+    *monFichier << "collection=" << this->collection << "\n";
+    *monFichier << "nbrPages="   << this->nbrPages   << "\n";
+    *monFichier << "annee="      << this->annee      << "\n";
+
+    return;
+}

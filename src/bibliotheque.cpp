@@ -13,14 +13,14 @@ void ihm (void){
 
         if ( (cmd.compare(0,3,"BYE")==0) || (cmd.compare(0,3,"bye")==0) ) {
             break;
-        }
-
-        if ( (cmd.compare(0,3,"ADD")==0) || (cmd.compare(0,3,"add")==0) ) {
+        } else if ( (cmd.compare(0,3,"ADD")==0) || (cmd.compare(0,3,"add")==0) ) {
             addType(&list, cmd);
-        }
-
-        if ( (cmd.compare(0,4,"LOAD")==0) || (cmd.compare(0,4,"load")==0) ) {
+        } else if ( (cmd.compare(0,4,"LOAD")==0) || (cmd.compare(0,4,"load")==0) ) {
             loadBib(&list, cmd);
+        } else if ( (cmd.compare(0,4,"SAVE")==0) || (cmd.compare(0,4,"save")==0) ) {
+            saveBib(&list, cmd);
+        } else if ( (cmd.compare(0,5,"RESET")==0) || (cmd.compare(0,5,"reset")==0) ) {
+            resetBib(&list);
         }
 
         std::cout << std::endl << list.size() << " éléments dans la bibliothèque" << std::endl;
@@ -33,6 +33,15 @@ void ihm (void){
     }
 
     return;
+}
+
+void resetBib (std::vector <ressource *> * list) {
+    // purge pour éviter les fuites mémoire
+    for ( int i = 0; i < list->size() ; i++ ) {
+        delete (* list)[i];
+    }
+    // reset de la bibliotheque
+    list->clear();
 }
 
 void addType (std::vector <ressource *> * list, std::string cmd) {
@@ -80,13 +89,13 @@ void addType (std::vector <ressource *> * list, std::string cmd) {
     }
 }
 
-
 void loadBib (std::vector <ressource *> * list, std::string cmd) {
 
-    list->clear();
+    resetBib(list);
+
     std::ifstream * monFichier = new std::ifstream;
 
-    monFichier->open ( cmd.substr(5, cmd.size() - 5).c_str() , std::fstream::in | std::fstream::out | std::fstream::app);
+    monFichier->open ( cmd.substr(5, cmd.size() - 5).c_str() );
 
     if ( monFichier->fail() ) {
         std::cout << "impossible de lire \"" << cmd.substr(5, cmd.size() - 5) << "\"" << std::endl;
@@ -128,6 +137,24 @@ void loadBib (std::vector <ressource *> * list, std::string cmd) {
                 }
             }
         }
+    }
+
+    monFichier->close();
+    delete monFichier;
+
+    return;
+}
+
+void saveBib (std::vector <ressource *> * list, std::string cmd) {
+
+    std::ofstream * monFichier = new std::ofstream;
+
+    monFichier->open ( cmd.substr(5, cmd.size() - 5).c_str());
+
+
+    for (int i = 0 ; i < list->size() ; i++) {
+        (* list)[i]->save(monFichier);
+        *monFichier << "\n";
     }
 
     monFichier->close();

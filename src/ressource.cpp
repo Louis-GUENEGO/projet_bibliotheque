@@ -115,6 +115,9 @@ void ressource::lecture (std::ifstream * monFichier){
 void ressource::create (void){
     std::cout<< "/!\\ méthode non implémentée" << std::endl;
 }
+void ressource::save (std::ofstream * monFichier){
+    std::cout<< "/!\\ méthode non implémentée" << std::endl;
+}
 
 
 

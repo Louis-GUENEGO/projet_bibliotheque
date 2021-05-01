@@ -14,6 +14,7 @@
             virtual void setNbrChapitres (unsigned int nbrChapitres);
 
             virtual void create (void);
+            virtual void save (std::ofstream * monFichier);
     };
 
 #endif

@@ -51,3 +51,15 @@ void dvd::create (void){
 
     return;
 }
+
+void dvd::save (std::ofstream * monFichier){
+
+    *monFichier << "type=dvd"                                << "\n";
+    *monFichier << "titre="          << this->titre          << "\n";
+    *monFichier << "auteur="         << this->auteur         << "\n";
+    *monFichier << "duree="          << this->duree          << "\n";
+    *monFichier << "maisonProd="     << this->maisonProd     << "\n";
+    *monFichier << "nbrChapitres="   << this->nbrChapitres   << "\n";
+
+    return;
+}

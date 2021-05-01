@@ -51,3 +51,15 @@ void cd::create (void){
 
     return;
 }
+
+void cd::save (std::ofstream * monFichier){
+
+    *monFichier << "type=cd"                         << "\n";
+    *monFichier << "titre="      << this->titre      << "\n";
+    *monFichier << "auteur="     << this->auteur     << "\n";
+    *monFichier << "duree="      << this->duree      << "\n";
+    *monFichier << "maisonProd=" << this->maisonProd << "\n";
+    *monFichier << "nbrPistes="  << this->nbrPistes  << "\n";
+
+    return;
+}

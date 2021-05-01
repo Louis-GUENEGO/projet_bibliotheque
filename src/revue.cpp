@@ -12,20 +12,20 @@ revue::revue(void){
     resume = std::string("(vide)");
 
     editeur = std::string("(vide)");
-    nrbArticles = 0;
+    nbrArticles = 0;
 }
 
 void revue::setEditeur (std::string _editeur){
     editeur = _editeur;
 }
-void revue::setNbrArticles (unsigned int _nrbArticles){
-    nrbArticles = _nrbArticles;
+void revue::setNbrArticles (unsigned int _nbrArticles){
+    nbrArticles = _nbrArticles;
 }
 
 void revue::infoDetail(void){
     livre::infoDetail();
     std::cout << "Editeur : " << editeur << std::endl;
-    std::cout << "Nombre d'articles : " << nrbArticles << std::endl;
+    std::cout << "Nombre d'articles : " << nbrArticles << std::endl;
 }
 
 void revue::create (void){
@@ -67,4 +67,19 @@ void revue::create (void){
 
     return;
 
+}
+
+void revue::save (std::ofstream * monFichier){
+
+    *monFichier << "type=revue"                          << "\n";
+    *monFichier << "titre="      << this->titre          << "\n";
+    *monFichier << "auteur="     << this->auteur         << "\n";
+    *monFichier << "resume="     << this->resume         << "\n";
+    *monFichier << "collection=" << this->collection     << "\n";
+    *monFichier << "nbrPages="   << this->nbrPages       << "\n";
+    *monFichier << "annee="      << this->annee          << "\n";
+    *monFichier << "editeur="    << this->editeur        << "\n";
+    *monFichier << "nbrArticles="<< this->nbrArticles    << "\n";
+
+    return;
 }

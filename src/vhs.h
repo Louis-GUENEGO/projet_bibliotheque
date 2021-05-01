@@ -16,6 +16,7 @@
 
             virtual void infoDetail(void);
             virtual void create (void);
+            virtual void save (std::ofstream * monFichier);
     };
 
 #endif

@@ -50,3 +50,14 @@ void vhs::create (void){
     return;
 
 }
+
+void vhs::save (std::ofstream * monFichier){
+
+    *monFichier << "type=vhs"                        << "\n";
+    *monFichier << "titre="      << this->titre      << "\n";
+    *monFichier << "auteur="     << this->auteur     << "\n";
+    *monFichier << "duree="      << this->duree      << "\n";
+    *monFichier << "maisonProd=" << this->maisonProd << "\n";
+
+    return;
+}

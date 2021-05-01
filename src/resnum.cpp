@@ -59,3 +59,15 @@ void resnum::create (void){
 
     return;
 }
+
+void resnum::save (std::ofstream * monFichier){
+
+    *monFichier << "type=resnum"             << "\n";
+    *monFichier << "titre="  << this->titre  << "\n";
+    *monFichier << "auteur=" << this->auteur << "\n";
+    *monFichier << "taille=" << this->taille << "\n";
+    *monFichier << "format=" << this->format << "\n";
+    *monFichier << "chemin=" << this->chemin << "\n";
+
+    return;
+}
