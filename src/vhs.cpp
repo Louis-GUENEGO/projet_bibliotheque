@@ -61,3 +61,14 @@ void vhs::save (std::ofstream * monFichier){
 
     return;
 }
+
+char vhs::search (const std::string & str){
+
+    if ( ressource::search(str) ) {
+        return 1;
+    } else if (this->maisonProd.find(str, 0) != std::string::npos) {
+        return 1;
+    } else {
+        return 0;
+    }
+}

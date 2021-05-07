@@ -71,3 +71,16 @@ void resnum::save (std::ofstream * monFichier){
 
     return;
 }
+
+char resnum::search (const std::string & str){
+
+    if ( ressource::search(str) ) {
+        return 1;
+    } else if (this->format.find(str, 0) != std::string::npos) {
+        return 1;
+    } else if (this->chemin.find(str, 0) != std::string::npos) {
+        return 1;
+    } else {
+        return 0;
+    }
+}

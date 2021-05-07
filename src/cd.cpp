@@ -63,3 +63,12 @@ void cd::save (std::ofstream * monFichier){
 
     return;
 }
+
+char cd::search (const std::string & str){
+
+    if ( vhs::search(str) ) {
+        return 1;
+    } else {
+        return 0;
+    }
+}

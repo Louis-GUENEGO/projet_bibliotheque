@@ -83,3 +83,13 @@ void revue::save (std::ofstream * monFichier){
 
     return;
 }
+
+char revue::search (const std::string & str){
+    if ( livre::search(str) ) {
+        return 1;
+    } else if (this->editeur.find(str, 0) != std::string::npos) {
+        return 1;
+    } else {
+        return 0;
+    }
+}

@@ -63,3 +63,13 @@ void dvd::save (std::ofstream * monFichier){
 
     return;
 }
+
+
+char dvd::search (const std::string & str){
+
+    if ( vhs::search(str) ) {
+        return 1;
+    } else {
+        return 0;
+    }
+}
