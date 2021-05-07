@@ -3,8 +3,10 @@
 void ihm (void){
 
     std::vector <ressource *> list;
-    
-    std::vector <ressource *> * listsearch = &list;
+
+    std::vector <ressource *> * listsearchinter = &list;
+
+    std::vector <ressource *> * * listsearch = &listsearchinter;
 
     std::string cmd;
 
@@ -25,10 +27,17 @@ void ihm (void){
             resetBib(&list);
         } else if ( (cmd.compare(0,6,"SEARCH")==0) || (cmd.compare(0,6,"search")==0) ) {
             std::string cmdbuff = cmd.substr(7,cmd.size()-7);
-            searchBib(&listsearch, cmdbuff,1);
+            searchBib(&list,listsearch, cmdbuff);
+        } else if ( (cmd.compare(0,6,"CLEAR")==0) || (cmd.compare(0,6,"clear")==0) ) {
+            (*listsearch)->clear();
+            * listsearch =  &list;
+            std::cout << "résultat de recherche réinitialisé" << std::endl;
+        } else if ( (cmd.compare(0,6,"LIST")==0) || (cmd.compare(0,6,"list")==0) ) {
+            afficheBib(* listsearch);
+        } else {
+            std::cout << "commande non reconnue" << std::endl;
         }
 
-        afficheBib(&list);
         std::cout << std::endl;
     }
 
@@ -112,11 +121,8 @@ void loadBib (std::vector <ressource *> * list, std::string cmd) {
     monFichier->open ( cmd.substr(5, cmd.size() - 5).c_str() );
 
     if ( monFichier->fail() ) {
-        std::cout << "impossible de lire \"" << cmd.substr(5, cmd.size() - 5) << "\"" << std::endl;
+        std::cout << "impossible de charger \"" << cmd.substr(5, cmd.size() - 5) << "\"" << std::endl;
     } else {
-
-        std::cout << "ouverture de \"" << cmd.substr(5, cmd.size() - 5) << "\"" << std::endl;
-
         std::string buff;
 
         while (!monFichier->eof()) {
@@ -151,6 +157,8 @@ void loadBib (std::vector <ressource *> * list, std::string cmd) {
                 }
             }
         }
+
+        std::cout << "chargement de \"" << cmd.substr(5, cmd.size() - 5) << "\" réussis" << std::endl;
     }
 
     monFichier->close();
@@ -165,10 +173,15 @@ void saveBib (std::vector <ressource *> * list, std::string cmd) {
 
     monFichier->open ( cmd.substr(5, cmd.size() - 5).c_str());
 
+    if ( monFichier->fail() ) {
+        std::cout << "impossible de sauvegarder dans \"" << cmd.substr(5, cmd.size() - 5) << "\"" << std::endl;
+    } else {
 
-    for (int i = 0 ; i < list->size() ; i++) {
-        (* list)[i]->save(monFichier);
-        *monFichier << "\n";
+        for (int i = 0 ; i < list->size() ; i++) {
+            (* list)[i]->save(monFichier);
+            *monFichier << "\n";
+        }
+        std::cout << "sauvegarde dans \"" << cmd.substr(5, cmd.size() - 5) << "\" réussis" << std::endl;
     }
 
     monFichier->close();
@@ -177,38 +190,26 @@ void saveBib (std::vector <ressource *> * list, std::string cmd) {
     return;
 }
 
-void searchBib (std::vector <ressource *> * * list, const std::string & str, char supp){
-  
-  
+void searchBib (std::vector <ressource *> * list, std::vector <ressource *> * * listsearch, const std::string & str){
+
     std::vector <ressource *> * tmp = new std::vector <ressource *>;
 
-    
+    std::cout << "recherche de \"" << str << "\"" << std::endl;
 
-    for ( unsigned int i = 0; i < (* list)->size() ; i++ ) {
-        if ( (* *list)[i] -> search(str) ) {
-	    (* tmp).push_back( (* *list)[i] );
+    for ( unsigned int i = 0; i < (* listsearch)->size() ; i++ ) {
+        if ( (* *listsearch)[i] -> search(str) ) {
+            (* tmp).push_back( (* *listsearch)[i] );
         }
     }
 
-    
-
-    for (unsigned int j = 0; j < tmp->size(); j++){
-      (* tmp)[j] -> infoDetail();
-    }
-    
-    if (supp){
-      for ( int k = (*list)->size()-1 ; k >= 0  ; k-- ) {
-	(* *list).pop_back();
-      }
-    }
-    
-    * * list = * tmp;
-
-    for (unsigned int j = 0; j < (* list)->size(); j++){
-      (* * list)[j] -> infoDetail();
+    if ( * * listsearch != * list ) {
+        (*listsearch)->clear();
+        delete(*listsearch);
     }
 
-    delete tmp;
+    * listsearch = tmp;
+
+    std::cout << tmp->size() << " éléments trouvé" << std::endl;
 
     return;
 }
