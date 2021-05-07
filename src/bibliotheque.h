@@ -23,6 +23,6 @@
     void loadBib   (std::vector <ressource *> * list, std::string cmd);
     void saveBib   (std::vector <ressource *> * list, std::string cmd);
     void resetBib  (std::vector <ressource *> * list);
-    void searchBib (std::vector <ressource *> * list, const std::string & str);
+    void searchBib (std::vector <ressource *> * * list, const std::string & str, char supp);
 
 #endif

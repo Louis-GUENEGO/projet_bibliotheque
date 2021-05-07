@@ -3,6 +3,8 @@
 void ihm (void){
 
     std::vector <ressource *> list;
+    
+    std::vector <ressource *> * listsearch = &list;
 
     std::string cmd;
 
@@ -23,10 +25,10 @@ void ihm (void){
             resetBib(&list);
         } else if ( (cmd.compare(0,6,"SEARCH")==0) || (cmd.compare(0,6,"search")==0) ) {
             std::string cmdbuff = cmd.substr(7,cmd.size()-7);
-            searchBib(&list, cmdbuff);
+            searchBib(&listsearch, cmdbuff,1);
         }
 
-        //afficheBib(&list);
+        afficheBib(&list);
         std::cout << std::endl;
     }
 
@@ -175,13 +177,38 @@ void saveBib (std::vector <ressource *> * list, std::string cmd) {
     return;
 }
 
-void searchBib (std::vector <ressource *> * list, const std::string & str){
+void searchBib (std::vector <ressource *> * * list, const std::string & str, char supp){
+  
+  
+    std::vector <ressource *> * tmp = new std::vector <ressource *>;
 
-    for ( unsigned int i = 0; i < list->size() ; i++ ) {
-        if ( (* list)[i] -> search(str) ) {
-            (* list)[i]->infoDetail();
+    
+
+    for ( unsigned int i = 0; i < (* list)->size() ; i++ ) {
+        if ( (* *list)[i] -> search(str) ) {
+	    (* tmp).push_back( (* *list)[i] );
         }
     }
+
+    
+
+    for (unsigned int j = 0; j < tmp->size(); j++){
+      (* tmp)[j] -> infoDetail();
+    }
+    
+    if (supp){
+      for ( int k = (*list)->size()-1 ; k >= 0  ; k-- ) {
+	(* *list).pop_back();
+      }
+    }
+    
+    * * list = * tmp;
+
+    for (unsigned int j = 0; j < (* list)->size(); j++){
+      (* * list)[j] -> infoDetail();
+    }
+
+    delete tmp;
 
     return;
 }
