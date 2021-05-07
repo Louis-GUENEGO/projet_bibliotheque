@@ -22,6 +22,7 @@
             virtual void infoDetail (void);
             virtual void create (void);
             virtual void save (std::ofstream * monFichier);
+            virtual char search (const std::string & str);
     };
 
 #endif

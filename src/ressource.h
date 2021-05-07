@@ -26,6 +26,7 @@
             virtual void lecture (std::ifstream * monFichier);
             virtual void save (std::ofstream * monFichier);
             virtual void create (void);
+            virtual char search (const std::string & str);
 
 
             // méthodes virtuelles Livres
@@ -52,6 +53,8 @@
             virtual void setFormat (std::string format);
             virtual void setTaille (unsigned int taille);
             virtual void setChemin (std::string chemin);
+
+
 
     };
 

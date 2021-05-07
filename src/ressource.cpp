@@ -118,6 +118,16 @@ void ressource::create (void){
 void ressource::save (std::ofstream * monFichier){
     std::cout<< "/!\\ méthode non implémentée" << std::endl;
 }
+char ressource::search (const std::string & str){
+    if (this->titre.find(str, 0) != std::string::npos) {
+        return 1;
+    } else if (this->auteur.find(str, 0) != std::string::npos) {
+        return 1;
+    } else {
+        return 0;
+    }
+}
+
 
 
 

@@ -21,27 +21,39 @@ void ihm (void){
             saveBib(&list, cmd);
         } else if ( (cmd.compare(0,5,"RESET")==0) || (cmd.compare(0,5,"reset")==0) ) {
             resetBib(&list);
+        } else if ( (cmd.compare(0,6,"SEARCH")==0) || (cmd.compare(0,6,"search")==0) ) {
+            std::string cmdbuff = cmd.substr(7,cmd.size()-7);
+            searchBib(&list, cmdbuff);
         }
 
-        std::cout << std::endl << list.size() << " éléments dans la bibliothèque" << std::endl;
-
-        for (unsigned int i = 0; i < list.size() ; i++) {
-            std::cout << std::endl;
-            list[i]->infoDetail();
-        }
+        //afficheBib(&list);
         std::cout << std::endl;
     }
 
     return;
 }
 
+void afficheBib (std::vector <ressource *> * list){
+    std::cout << std::endl << list->size() << " éléments dans la bibliothèque" << std::endl;
+
+    for (unsigned int i = 0; i < list->size() ; i++) {
+        std::cout << std::endl;
+        (* list)[i]->infoDetail();
+    }
+    std::cout << std::endl;
+
+    return;
+}
+
 void resetBib (std::vector <ressource *> * list) {
     // purge pour éviter les fuites mémoire
-    for ( int i = 0; i < list->size() ; i++ ) {
+    for ( unsigned int i = 0; i < list->size() ; i++ ) {
         delete (* list)[i];
     }
     // reset de la bibliotheque
     list->clear();
+
+    return;
 }
 
 void addType (std::vector <ressource *> * list, std::string cmd) {
@@ -159,6 +171,17 @@ void saveBib (std::vector <ressource *> * list, std::string cmd) {
 
     monFichier->close();
     delete monFichier;
+
+    return;
+}
+
+void searchBib (std::vector <ressource *> * list, const std::string & str){
+
+    for ( unsigned int i = 0; i < list->size() ; i++ ) {
+        if ( (* list)[i] -> search(str) ) {
+            (* list)[i]->infoDetail();
+        }
+    }
 
     return;
 }

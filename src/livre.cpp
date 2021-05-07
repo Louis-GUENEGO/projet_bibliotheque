@@ -75,3 +75,16 @@ void livre::save (std::ofstream * monFichier){
 
     return;
 }
+
+char livre::search (const std::string & str){
+
+    if ( ressource::search(str) ) {
+        return 1;
+    } else if (this->resume.find(str, 0) != std::string::npos) {
+        return 1;
+    } else if (this->collection.find(str, 0) != std::string::npos) {
+        return 1;
+    } else {
+        return 0;
+    }
+}
