@@ -26,13 +26,18 @@ void ihm (void){
         } else if ( (cmd.compare(0,5,"RESET")==0) || (cmd.compare(0,5,"reset")==0) ) {
             resetBib(&list);
         } else if ( (cmd.compare(0,6,"SEARCH")==0) || (cmd.compare(0,6,"search")==0) ) {
-            std::string cmdbuff = cmd.substr(7,cmd.size()-7);
-            searchBib(&list,listsearch, cmdbuff);
-        } else if ( (cmd.compare(0,6,"CLEAR")==0) || (cmd.compare(0,6,"clear")==0) ) {
+            if (cmd.size() < 8) {
+                std::cout << "recherche vide" << std::endl;
+            } else {
+                std::string cmdbuff = cmd.substr(7,cmd.size()-7);
+                searchBib(&list,listsearch, cmdbuff);
+            }
+
+        } else if ( (cmd.compare(0,5,"CLEAR")==0) || (cmd.compare(0,5,"clear")==0) ) {
             (*listsearch)->clear();
             * listsearch =  &list;
             std::cout << "résultat de recherche réinitialisé" << std::endl;
-        } else if ( (cmd.compare(0,6,"LIST")==0) || (cmd.compare(0,6,"list")==0) ) {
+        } else if ( (cmd.compare(0,4,"LIST")==0) || (cmd.compare(0,4,"list")==0) ) {
             afficheBib(* listsearch);
         } else {
             std::cout << "commande non reconnue" << std::endl;
@@ -108,84 +113,97 @@ void addType (std::vector <ressource *> * list, std::string cmd) {
         }
 
     } else {
+        std::cout << "type manquant" << std::endl;
         return;
     }
 }
 
 void loadBib (std::vector <ressource *> * list, std::string cmd) {
 
-    resetBib(list);
-
-    std::ifstream * monFichier = new std::ifstream;
-
-    monFichier->open ( cmd.substr(5, cmd.size() - 5).c_str() );
-
-    if ( monFichier->fail() ) {
-        std::cout << "impossible de charger \"" << cmd.substr(5, cmd.size() - 5) << "\"" << std::endl;
+    if (cmd.size() < 6) {
+        std::cout << "nom du fichier manquant" << std::endl;
     } else {
-        std::string buff;
+        resetBib(list);
 
-        while (!monFichier->eof()) {
+        std::ifstream * monFichier = new std::ifstream;
 
-            getline(*monFichier, buff);
+        monFichier->open ( cmd.substr(5, cmd.size() - 5).c_str() );
 
-            if (buff.compare(0,4, "type") == 0) {
-                if (buff.compare(5, 5, "livre") == 0) {
-                    livre * newLivre = new livre;
-                    newLivre->lecture(monFichier);
-                    list->push_back(newLivre);
-                } else if (buff.compare(5, 5, "revue") == 0) {
-                    revue * newRevue = new revue;
-                    newRevue->lecture(monFichier);
-                    list->push_back(newRevue);
-                } else if (buff.compare(5, 3, "vhs") == 0) {
-                    vhs * newVHS = new vhs;
-                    newVHS->lecture(monFichier);
-                    list->push_back(newVHS);
-                } else if (buff.compare(5, 2, "cd") == 0) {
-                    cd * newCD = new cd;
-                    newCD->lecture(monFichier);
-                    list->push_back(newCD);
-                } else if (buff.compare(5, 3, "dvd") == 0) {
-                    dvd * newDVD = new dvd;
-                    newDVD->lecture(monFichier);
-                    list->push_back(newDVD);
-                } else if (buff.compare(5, 6, "resnum") == 0) {
-                    resnum * newRESNUM = new resnum;
-                    newRESNUM->lecture(monFichier);
-                    list->push_back(newRESNUM);
+        if ( monFichier->fail() ) {
+            std::cout << "impossible de charger \"" << cmd.substr(5, cmd.size() - 5) << "\"" << std::endl;
+        } else {
+            std::string buff;
+
+            while (!monFichier->eof()) {
+
+                getline(*monFichier, buff);
+
+                if (buff.compare(0,4, "type") == 0) {
+                    if (buff.compare(5, 5, "livre") == 0) {
+                        livre * newLivre = new livre;
+                        newLivre->lecture(monFichier);
+                        list->push_back(newLivre);
+                    } else if (buff.compare(5, 5, "revue") == 0) {
+                        revue * newRevue = new revue;
+                        newRevue->lecture(monFichier);
+                        list->push_back(newRevue);
+                    } else if (buff.compare(5, 3, "vhs") == 0) {
+                        vhs * newVHS = new vhs;
+                        newVHS->lecture(monFichier);
+                        list->push_back(newVHS);
+                    } else if (buff.compare(5, 2, "cd") == 0) {
+                        cd * newCD = new cd;
+                        newCD->lecture(monFichier);
+                        list->push_back(newCD);
+                    } else if (buff.compare(5, 3, "dvd") == 0) {
+                        dvd * newDVD = new dvd;
+                        newDVD->lecture(monFichier);
+                        list->push_back(newDVD);
+                    } else if (buff.compare(5, 6, "resnum") == 0) {
+                        resnum * newRESNUM = new resnum;
+                        newRESNUM->lecture(monFichier);
+                        list->push_back(newRESNUM);
+                    }
                 }
             }
+
+            std::cout << "chargement de \"" << cmd.substr(5, cmd.size() - 5) << "\" réussis" << std::endl;
         }
 
-        std::cout << "chargement de \"" << cmd.substr(5, cmd.size() - 5) << "\" réussis" << std::endl;
+        monFichier->close();
+        delete monFichier;
+
     }
 
-    monFichier->close();
-    delete monFichier;
-
     return;
+
 }
 
 void saveBib (std::vector <ressource *> * list, std::string cmd) {
 
-    std::ofstream * monFichier = new std::ofstream;
-
-    monFichier->open ( cmd.substr(5, cmd.size() - 5).c_str());
-
-    if ( monFichier->fail() ) {
-        std::cout << "impossible de sauvegarder dans \"" << cmd.substr(5, cmd.size() - 5) << "\"" << std::endl;
+    if (cmd.size() < 6) {
+        std::cout << "nom du fichier manquant" << std::endl;
     } else {
 
-        for (int i = 0 ; i < list->size() ; i++) {
-            (* list)[i]->save(monFichier);
-            *monFichier << "\n";
-        }
-        std::cout << "sauvegarde dans \"" << cmd.substr(5, cmd.size() - 5) << "\" réussis" << std::endl;
-    }
+        std::ofstream * monFichier = new std::ofstream;
 
-    monFichier->close();
-    delete monFichier;
+        monFichier->open ( cmd.substr(5, cmd.size() - 5).c_str());
+
+        if ( monFichier->fail() ) {
+            std::cout << "impossible de sauvegarder dans \"" << cmd.substr(5, cmd.size() - 5) << "\"" << std::endl;
+        } else {
+
+            for (int i = 0 ; i < list->size() ; i++) {
+                (* list)[i]->save(monFichier);
+                *monFichier << "\n";
+            }
+            std::cout << "sauvegarde dans \"" << cmd.substr(5, cmd.size() - 5) << "\" réussis" << std::endl;
+        }
+
+        monFichier->close();
+        delete monFichier;
+
+    }
 
     return;
 }
@@ -212,4 +230,6 @@ void searchBib (std::vector <ressource *> * list, std::vector <ressource *> * * 
     std::cout << tmp->size() << " éléments trouvé" << std::endl;
 
     return;
+
+
 }
