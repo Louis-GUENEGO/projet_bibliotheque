@@ -4,6 +4,8 @@ unsigned int IDgen;
 
 void ihm (void){
 
+    char logedIn = 0;
+
     std::vector <ressource *> bib;
 
     std::vector <ressource *> * bibsearchinter = &bib;
@@ -14,21 +16,19 @@ void ihm (void){
 
     IDgen = 1;
 
+    // chargement automatique de la bibliothèque de base lors du démarage
+    loadBib(&bib, DEFAULT_BIB_LOAD);
+
     std::cout << "Entrez votre commande" << std::endl;
 
     while (1) {
         getline (std::cin, cmd);
 
-        if ( (cmd.compare(0,3,"BYE")==0) || (cmd.compare(0,3,"bye")==0) ) {
-            break;
-        } else if ( (cmd.compare(0,3,"ADD")==0) || (cmd.compare(0,3,"add")==0) ) {
-            addType(&bib, cmd);
-        } else if ( (cmd.compare(0,4,"LOAD")==0) || (cmd.compare(0,4,"load")==0) ) {
-            loadBib(&bib, cmd);
-        } else if ( (cmd.compare(0,4,"SAVE")==0) || (cmd.compare(0,4,"save")==0) ) {
-            saveBib(&bib, cmd);
-        } else if ( (cmd.compare(0,5,"RESET")==0) || (cmd.compare(0,5,"reset")==0) ) {
-            resetBib(&bib);
+        if ( (cmd.compare(0,5,"LOGIN")==0) || (cmd.compare(0,5,"login")==0) ) {
+            logedIn = login();
+        } else if ( (cmd.compare(0,6,"LOGOUT")==0) || (cmd.compare(0,6,"logout")==0) ) {
+            logedIn = 0;
+            std::cout << "déconexion réussie" << std::endl;
         } else if ( (cmd.compare(0,6,"SEARCH")==0) || (cmd.compare(0,6,"search")==0) ) {
             if (cmd.size() < 8) {
                 std::cout << "recherche vide" << std::endl;
@@ -36,17 +36,55 @@ void ihm (void){
                 std::string cmdbuff = cmd.substr(7,cmd.size()-7);
                 searchBib(&bib,bibsearch, cmdbuff);
             }
-        } else if ( (cmd.compare(0,5,"CLEAR")==0) || (cmd.compare(0,5,"clear")==0) ) {
-            (*bibsearch)->clear();
-            * bibsearch =  &bib;
-            std::cout << "résultat de recherche réinitialisé" << std::endl;
         } else if ( (cmd.compare(0,4,"LIST")==0) || (cmd.compare(0,4,"list")==0) ) {
             afficheBib(* bibsearch);
         } else if ( (cmd.compare(0,4,"SHOW")==0) || (cmd.compare(0,4,"show")==0) ) {
             showID(&bib, cmd);
+        } else if ( (cmd.compare(0,5,"CLEAR")==0) || (cmd.compare(0,5,"clear")==0) ) {
+            (*bibsearch)->clear();
+            * bibsearch =  &bib;
+            std::cout << "résultat de recherche réinitialisé" << std::endl;
+        } else if ( (cmd.compare(0,6,"RELOAD")==0) || (cmd.compare(0,6,"reload")==0) ) {
+            loadBib(&bib, DEFAULT_BIB_LOAD);
+        } else if ( (cmd.compare(0,3,"BYE")==0) || (cmd.compare(0,3,"bye")==0) ) {
+                break;
+        }
+
+        // commandes super user
+        else if ( (cmd.compare(0,3,"ADD")==0) || (cmd.compare(0,3,"add")==0) ) {
+            if (logedIn) {
+                addType(&bib, cmd);
+            } else {
+                std::cout << "super user required" << std::endl;
+            }
+        } else if ( (cmd.compare(0,4,"LOAD")==0) || (cmd.compare(0,4,"load")==0) ) {
+            if (logedIn) {
+                loadBib(&bib, cmd);
+            } else {
+                std::cout << "super user required" << std::endl;
+            }
+        } else if ( (cmd.compare(0,4,"SAVE")==0) || (cmd.compare(0,4,"save")==0) ) {
+            if (logedIn) {
+                saveBib(&bib, cmd);
+            } else {
+                std::cout << "super user required" << std::endl;
+            }
+        } else if ( (cmd.compare(0,5,"RESET")==0) || (cmd.compare(0,5,"reset")==0) ) {
+            if (logedIn) {
+                resetBib(&bib);
+            } else {
+                std::cout << "super user required" << std::endl;
+            }
         } else if ( (cmd.compare(0,6,"DELETE")==0) || (cmd.compare(0,6,"delete")==0) ) {
-            deleteID(&bib, cmd);
-        } else {
+            if (logedIn) {
+                deleteID(&bib, cmd);
+            } else {
+                std::cout << "super user required" << std::endl;
+            }
+        }
+
+        // fin
+        else {
             std::cout << "commande non reconnue" << std::endl;
         }
 
@@ -192,7 +230,9 @@ void loadBib (std::vector <ressource *> * bib, std::string cmd) {
 
 void saveBib (std::vector <ressource *> * bib, std::string cmd) {
 
-    if (cmd.size() < 6) {
+    if (cmd.size() == 4) {
+        saveBib(bib, DEFAULT_BIB_LOAD);
+    } else if (cmd.size() < 6) {
         std::cout << "nom du fichier manquant" << std::endl;
     } else {
 
@@ -314,4 +354,21 @@ void deleteID   (std::vector <ressource *> * bib, std::string cmd){
     }
 
     return;
+}
+
+char login (void){
+
+    std::string chaine;
+
+    std::cout << "mdp admin : ";
+    getline (std::cin, chaine);
+
+    if ( chaine.compare("admin") == 0) {
+        std::cout << "conexion réussie" << std::endl;
+        return 1;
+    } else {
+        std::cout << "conexion échouée" << std::endl;
+        return 0;
+    }
+
 }

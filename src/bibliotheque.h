@@ -1,6 +1,8 @@
 #ifndef _BIBLIOTHEQUE_H_
 #define _BIBLIOTHEQUE_H_
 
+    #define DEFAULT_BIB_LOAD "load bib"
+
     #include <vector>
     #include <iostream>
     #include <string>
@@ -29,5 +31,7 @@
 
     void showID   (std::vector <ressource *> * bib, std::string cmd);
     void deleteID   (std::vector <ressource *> * bib, std::string cmd);
+
+    char login (void);
 
 #endif
