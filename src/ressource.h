@@ -28,6 +28,7 @@
             virtual void save (std::ofstream * monFichier);
             virtual void create (void);
             virtual char search (const std::string & str);
+            virtual unsigned int readID (void);
 
 
             // méthodes virtuelles Livres

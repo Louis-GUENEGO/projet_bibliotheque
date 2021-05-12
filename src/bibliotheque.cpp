@@ -1,5 +1,7 @@
 #include "bibliotheque.h"
 
+unsigned int IDgen;
+
 void ihm (void){
 
     std::vector <ressource *> bib;
@@ -9,6 +11,8 @@ void ihm (void){
     std::vector <ressource *> * * bibsearch = &bibsearchinter;
 
     std::string cmd;
+
+    IDgen = 1;
 
     std::cout << "Entrez votre commande" << std::endl;
 
@@ -32,13 +36,16 @@ void ihm (void){
                 std::string cmdbuff = cmd.substr(7,cmd.size()-7);
                 searchBib(&bib,bibsearch, cmdbuff);
             }
-
         } else if ( (cmd.compare(0,5,"CLEAR")==0) || (cmd.compare(0,5,"clear")==0) ) {
             (*bibsearch)->clear();
             * bibsearch =  &bib;
             std::cout << "résultat de recherche réinitialisé" << std::endl;
         } else if ( (cmd.compare(0,4,"LIST")==0) || (cmd.compare(0,4,"list")==0) ) {
             afficheBib(* bibsearch);
+        } else if ( (cmd.compare(0,4,"SHOW")==0) || (cmd.compare(0,4,"show")==0) ) {
+            showID(&bib, cmd);
+        } else if ( (cmd.compare(0,6,"DELETE")==0) || (cmd.compare(0,6,"delete")==0) ) {
+            deleteID(&bib, cmd);
         } else {
             std::cout << "commande non reconnue" << std::endl;
         }
@@ -53,8 +60,7 @@ void afficheBib (std::vector <ressource *> * bib){
     std::cout << std::endl << bib->size() << " éléments dans la bibliothèque" << std::endl;
 
     for (unsigned int i = 0; i < bib->size() ; i++) {
-        std::cout << std::endl;
-        (* bib)[i]->infoDetail();
+        (* bib)[i]->info();
     }
     std::cout << std::endl;
 
@@ -74,40 +80,42 @@ void resetBib (std::vector <ressource *> * bib) {
 
 void addType (std::vector <ressource *> * bib, std::string cmd) {
 
+    newIdFree(bib);
+
     if (cmd.size() == 9) {
         if ( (cmd.compare(4,5,"LIVRE")==0) || (cmd.compare(4,5,"livre")==0) ) {
-            livre * nouvLivre = new livre;
+            livre * nouvLivre = new livre(IDgen);
             nouvLivre->create();
             bib->push_back( nouvLivre );
 
         } else if ( (cmd.compare(4,5,"REVUE")==0) || (cmd.compare(4,5,"revue")==0) ) {
-            revue * nouvRevue = new revue;
+            revue * nouvRevue = new revue(IDgen);
             nouvRevue->create();
             bib->push_back( nouvRevue );
         }
 
     } else if (cmd.size() == 10) {
         if ( (cmd.compare(4,6,"RESNUM")==0) || (cmd.compare(4,6,"resnum")==0) ) {
-            resnum * nouvRESNUM = new resnum;
+            resnum * nouvRESNUM = new resnum(IDgen);
             nouvRESNUM->create();
             bib->push_back( nouvRESNUM );
         }
 
     } else if (cmd.size() == 7) {
         if ( (cmd.compare(4,3,"VHS")==0) || (cmd.compare(4,3,"vhs")==0) ) {
-            vhs * nouvVHS = new vhs;
+            vhs * nouvVHS = new vhs(IDgen);
             nouvVHS->create();
             bib->push_back( nouvVHS );
 
         } else if ( (cmd.compare(4,5,"DVD")==0) || (cmd.compare(4,5,"dvd")==0) ) {
-            dvd * nouvDVD = new dvd;
+            dvd * nouvDVD = new dvd(IDgen);
             nouvDVD->create();
             bib->push_back( nouvDVD );
         }
 
     } else if (cmd.size() == 6) {
         if ( (cmd.compare(4,6,"CD")==0) || (cmd.compare(4,6,"cd")==0) ) {
-            cd * nouvCD = new cd;
+            cd * nouvCD = new cd(IDgen);
             nouvCD->create();
             bib->push_back( nouvCD );
         }
@@ -139,28 +147,29 @@ void loadBib (std::vector <ressource *> * bib, std::string cmd) {
                 getline(*monFichier, buff);
 
                 if (buff.compare(0,4, "type") == 0) {
+                    newIdFree(bib);
                     if (buff.compare(5, 5, "livre") == 0) {
-                        livre * newLivre = new livre;
+                        livre * newLivre = new livre(IDgen);
                         newLivre->lecture(monFichier);
                         bib->push_back(newLivre);
                     } else if (buff.compare(5, 5, "revue") == 0) {
-                        revue * newRevue = new revue;
+                        revue * newRevue = new revue(IDgen);
                         newRevue->lecture(monFichier);
                         bib->push_back(newRevue);
                     } else if (buff.compare(5, 3, "vhs") == 0) {
-                        vhs * newVHS = new vhs;
+                        vhs * newVHS = new vhs(IDgen);
                         newVHS->lecture(monFichier);
                         bib->push_back(newVHS);
                     } else if (buff.compare(5, 2, "cd") == 0) {
-                        cd * newCD = new cd;
+                        cd * newCD = new cd(IDgen);
                         newCD->lecture(monFichier);
                         bib->push_back(newCD);
                     } else if (buff.compare(5, 3, "dvd") == 0) {
-                        dvd * newDVD = new dvd;
+                        dvd * newDVD = new dvd(IDgen);
                         newDVD->lecture(monFichier);
                         bib->push_back(newDVD);
                     } else if (buff.compare(5, 6, "resnum") == 0) {
-                        resnum * newRESNUM = new resnum;
+                        resnum * newRESNUM = new resnum(IDgen);
                         newRESNUM->lecture(monFichier);
                         bib->push_back(newRESNUM);
                     }
@@ -232,4 +241,74 @@ void searchBib (std::vector <ressource *> * bib, std::vector <ressource *> * * b
     return;
 
 
+}
+
+
+char newIdFree (std::vector <ressource *> * bib){
+
+    unsigned int i;
+
+    unsigned short whatchDog = 1;
+
+    while (whatchDog++) {
+        for ( i = 0; i < bib->size() ; i++ ) {
+            if ( (* bib)[i] -> readID() == IDgen) {
+                IDgen++;
+                break;
+            }
+        }
+        if (i == bib->size()) {
+            return 1;
+        }
+
+    }
+
+    return 0;
+
+}
+
+void showID   (std::vector <ressource *> * bib, std::string cmd){
+
+    int buffint;
+
+    if (cmd.size() < 6) {
+        std::cout << "ID manquant" << std::endl;
+    } else {
+
+        buffint = std::atoi(cmd.substr(5, cmd.size() - 5).c_str());
+        if (buffint > 0) {
+            for ( unsigned int i = 0; i < bib->size() ; i++ ) {
+                if ( (* bib)[i] -> readID() == buffint) {
+                    (* bib)[i] -> infoDetail();
+                }
+            }
+        } else {
+            std::cout << "ID invalide" << std::endl;
+        }
+    }
+
+    return;
+}
+
+void deleteID   (std::vector <ressource *> * bib, std::string cmd){
+
+    int buffint;
+
+    if (cmd.size() < 8) {
+        std::cout << "ID manquant" << std::endl;
+    } else {
+
+        buffint = std::atoi(cmd.substr(7, cmd.size() - 7).c_str());
+        if (buffint > 0) {
+            for ( unsigned int i = 0; i < bib->size() ; i++ ) {
+                if ( (* bib)[i] -> readID() == buffint) {
+                    bib->erase(bib->begin() + i);
+                }
+            }
+        } else {
+            std::cout << "ID invalide" << std::endl;
+        }
+    }
+
+    return;
 }

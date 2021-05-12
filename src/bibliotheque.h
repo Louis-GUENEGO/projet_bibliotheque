@@ -25,6 +25,9 @@
     void resetBib  (std::vector <ressource *> * bib);
     void searchBib (std::vector <ressource *> * bib, std::vector <ressource *> * * bibsearch, const std::string & str);
 
-    char newIdFree (std::vector <ressource *> * bib, unsigned char newID);
+    char newIdFree (std::vector <ressource *> * bib);
+
+    void showID   (std::vector <ressource *> * bib, std::string cmd);
+    void deleteID   (std::vector <ressource *> * bib, std::string cmd);
 
 #endif

@@ -10,6 +10,9 @@ void ressource::setAuteur (std::string _auteur){
     auteur = _auteur;
 }
 void ressource::info (void){
+
+    std::cout << "(" << ID << ") ";
+
     switch (type){
         case LIVRE:
             std::cout << "Livre : ";
@@ -35,7 +38,7 @@ void ressource::info (void){
             std::cout << "Ressource numérique : ";
             break;
     }
-    std::cout << "(" << ID << ") " << titre << ", de " << auteur << std::endl;
+    std::cout << titre << ", de " << auteur << std::endl;
 }
 
 void ressource::infoDetail (void) {
@@ -130,6 +133,10 @@ char ressource::search (const std::string & str){
     } else {
         return 0;
     }
+}
+
+unsigned int ressource::readID (void){
+    return ID;
 }
 
 
