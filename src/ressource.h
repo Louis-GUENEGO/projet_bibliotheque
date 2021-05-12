@@ -14,6 +14,7 @@
             typeRessource type;
             std::string titre;
             std::string auteur;
+            unsigned int ID;
 
         public:
             ressource();
