@@ -68,6 +68,8 @@ void afficheBib (std::vector <ressource *> * bib){
 }
 
 void resetBib (std::vector <ressource *> * bib) {
+    IDgen = 1;
+
     // purge pour éviter les fuites mémoire
     for ( unsigned int i = 0; i < bib->size() ; i++ ) {
         delete (* bib)[i];
@@ -302,6 +304,7 @@ void deleteID   (std::vector <ressource *> * bib, std::string cmd){
         if (buffint > 0) {
             for ( unsigned int i = 0; i < bib->size() ; i++ ) {
                 if ( (* bib)[i] -> readID() == buffint) {
+                    delete (* bib)[i];
                     bib->erase(bib->begin() + i);
                 }
             }
