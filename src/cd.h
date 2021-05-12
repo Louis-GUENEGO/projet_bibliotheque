@@ -9,6 +9,8 @@
 
         public:
             cd(void);
+            cd(unsigned int _ID);
+
             virtual void setNbrPiste (unsigned int nbrPistes);
             virtual void infoDetail (void);
 

@@ -10,6 +10,7 @@
 
         public:
             revue(void);
+            revue(unsigned int _ID);
 
             virtual void setEditeur (std::string editeur);
             virtual void setNbrArticles (unsigned int nrbArticles);

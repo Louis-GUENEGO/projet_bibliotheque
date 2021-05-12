@@ -1,6 +1,20 @@
 #include "vhs.h"
 
 vhs::vhs(void){
+    ID = 0;
+
+    type = VHS;
+
+    titre = std::string("(vide)");
+    auteur = std::string("(vide)");
+
+    duree = 0;
+    maisonProd = std::string("(vide)");
+}
+
+vhs::vhs(unsigned int _ID){
+    ID = _ID;
+
     type = VHS;
 
     titre = std::string("(vide)");

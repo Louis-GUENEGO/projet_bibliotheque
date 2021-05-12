@@ -11,6 +11,8 @@
 
         public:
             resnum(void);
+            resnum(unsigned int _ID);
+
             virtual void setFormat (std::string format);
             virtual void setTaille (unsigned int taille);
             virtual void setChemin (std::string chemin);

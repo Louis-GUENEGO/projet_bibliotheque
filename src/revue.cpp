@@ -1,6 +1,25 @@
 #include "revue.h"
 
 revue::revue(void){
+    ID = 0;
+
+    type = REVUE;
+
+    titre = std::string("(vide)");
+    auteur = std::string("(vide)");
+
+    annee = 0;
+    nbrPages = 0;
+    collection = std::string("(vide)");
+    resume = std::string("(vide)");
+
+    editeur = std::string("(vide)");
+    nbrArticles = 0;
+}
+
+revue::revue(unsigned int _ID){
+    ID = _ID;
+
     type = REVUE;
 
     titre = std::string("(vide)");
