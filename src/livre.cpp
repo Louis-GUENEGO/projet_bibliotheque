@@ -1,6 +1,22 @@
 #include "livre.h"
 
 livre::livre(void){
+    ID = 0;
+
+    type = LIVRE;
+
+    titre = std::string("(vide)");
+    auteur = std::string("(vide)");
+
+    annee = 0;
+    nbrPages = 0;
+    collection = std::string("(vide)");
+    resume = std::string("(vide)");
+}
+
+livre::livre(unsigned int _ID) {
+    ID = _ID;
+
     type = LIVRE;
 
     titre = std::string("(vide)");

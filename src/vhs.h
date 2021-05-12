@@ -10,6 +10,7 @@
 
         public:
             vhs(void);
+            vhs(unsigned int _ID);
 
             virtual void setMaisonProd (std::string maisonProd);
             virtual void setDuree (unsigned int duree);

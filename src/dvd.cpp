@@ -1,6 +1,22 @@
 #include "dvd.h"
 
 dvd::dvd(void) {
+    ID = 0;
+
+    type = DVD;
+
+    titre = std::string("(vide)");
+    auteur = std::string("(vide)");
+
+    duree = 0;
+    maisonProd = std::string("(vide)");
+
+    nbrChapitres = 0;
+}
+
+dvd::dvd(unsigned int _ID) {
+    ID = _ID;
+
     type = DVD;
 
     titre = std::string("(vide)");

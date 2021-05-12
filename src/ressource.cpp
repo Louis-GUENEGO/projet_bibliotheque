@@ -35,10 +35,13 @@ void ressource::info (void){
             std::cout << "Ressource numérique : ";
             break;
     }
-    std::cout << titre << ", de " << auteur << std::endl;
+    std::cout << "(" << ID << ") " << titre << ", de " << auteur << std::endl;
 }
 
 void ressource::infoDetail (void) {
+
+    std::cout << "ID : " << ID << std::endl;
+
     switch (type){
         case LIVRE:
             std::cout << "Type : livre" << std::endl;
@@ -64,6 +67,7 @@ void ressource::infoDetail (void) {
             std::cout << "Type : Ressource numérique" << std::endl;
             break;
     }
+
     std::cout << "Titre : " << titre << std::endl;
     std::cout << "Auteur : " << auteur << std::endl;
 }

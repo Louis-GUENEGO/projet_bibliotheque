@@ -1,6 +1,22 @@
 #include "cd.h"
 
 cd::cd(void){
+    ID = 0;
+
+    type = CD;
+
+    titre = std::string("(vide)");
+    auteur = std::string("(vide)");
+
+    duree = 0;
+    maisonProd = std::string("(vide)");
+
+    nbrPistes = 0;
+}
+
+cd::cd(unsigned int _ID){
+    ID = _ID;
+
     type = CD;
 
     titre = std::string("(vide)");

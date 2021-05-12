@@ -2,6 +2,21 @@
 
 
 resnum::resnum(void){
+    ID = 0;
+
+    type = RESNUM;
+
+    titre = std::string("(vide)");
+    auteur = std::string("(vide)");
+
+    format = std::string("(vide)");
+    taille = 0;
+    chemin = std::string("(vide)");
+}
+
+resnum::resnum(unsigned int _ID){
+    ID = _ID;
+
     type = RESNUM;
 
     titre = std::string("(vide)");
