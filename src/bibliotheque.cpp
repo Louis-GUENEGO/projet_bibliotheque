@@ -45,8 +45,14 @@ void ihm (void){
             std::cout << "résultat de recherche réinitialisé" << std::endl;
         } else if ( (cmd.compare(0,6,"RELOAD")==0) || (cmd.compare(0,6,"reload")==0) ) {
             loadBib(&bib, DEFAULT_BIB_LOAD);
+        } else if ( (cmd.compare(0,7,"RESERVE")==0) || (cmd.compare(0,7,"reserve")==0) ) {
+            reserveID(&bib, cmd);
+        } else if ( (cmd.compare(0,6,"BORROW")==0) || (cmd.compare(0,6,"borrow")==0) ) {
+            borrowID(&bib, cmd);
+        } else if ( (cmd.compare(0,6,"RETURN")==0) || (cmd.compare(0,6,"return")==0) ) {
+            returnID(&bib, cmd);
         } else if ( (cmd.compare(0,3,"BYE")==0) || (cmd.compare(0,3,"bye")==0) ) {
-                break;
+            break;
         }
 
         // commandes admins (MDP admin)
@@ -306,25 +312,103 @@ char newIdFree (std::vector <ressource *> * bib){
 
 void showID   (std::vector <ressource *> * bib, std::string cmd){
 
-    int buffint;
+    unsigned int buffint;
+    int i;
 
     if (cmd.size() < 6) {
         std::cout << "ID manquant" << std::endl;
     } else {
 
         buffint = std::atoi(cmd.substr(5, cmd.size() - 5).c_str());
-        if (buffint > 0) {
-            for ( unsigned int i = 0; i < bib->size() ; i++ ) {
-                if ( (* bib)[i] -> readID() == buffint) {
-                    (* bib)[i] -> infoDetail();
-                }
+        if ( (i = searchID(bib, buffint)) >= 0) {
+            (* bib)[i] -> infoDetail();
+        } else {
+            std::cout << "ID introuvable" << std::endl;
+        }
+
+    }
+}
+
+void reserveID   (std::vector <ressource *> * bib, std::string cmd){
+
+    unsigned int buffint;
+    int i;
+
+    if (cmd.size() < 9) {
+        std::cout << "ID manquant" << std::endl;
+    } else {
+
+        buffint = std::atoi(cmd.substr(8, cmd.size() - 8).c_str());
+        if ( (i = searchID(bib, buffint)) >= 0) {
+            if ( (* bib)[i] -> setEtatRessource(RESERVE) ) {
+                std::cout << "réservation réussie" << std::endl;
+            } else {
+                std::cout << "réservation impossible" << std::endl;
             }
         } else {
-            std::cout << "ID invalide" << std::endl;
+            std::cout << "ID introuvable" << std::endl;
         }
-    }
 
-    return;
+    }
+}
+
+void borrowID   (std::vector <ressource *> * bib, std::string cmd){
+
+    unsigned int buffint;
+    int i;
+
+    if (cmd.size() < 8) {
+        std::cout << "ID manquant" << std::endl;
+    } else {
+
+        buffint = std::atoi(cmd.substr(7, cmd.size() - 7).c_str());
+
+        if ( (i = searchID(bib, buffint)) >= 0 ) {
+            if ( (* bib)[i] -> setEtatRessource(EMPRUNTE) ) {
+                std::cout << "emprunt réussi" << std::endl;
+            } else {
+                std::cout << "emprunt impossible" << std::endl;
+            }
+        } else {
+            std::cout << "ID introuvable" << std::endl;
+        }
+
+    }
+}
+void returnID   (std::vector <ressource *> * bib, std::string cmd){
+    unsigned int buffint;
+    int i;
+
+    if (cmd.size() < 8) {
+        std::cout << "ID manquant" << std::endl;
+    } else {
+
+        buffint = std::atoi(cmd.substr(7, cmd.size() - 7).c_str());
+        if ( (i = searchID(bib, buffint)) >= 0) {
+            if ( (* bib)[i] -> setEtatRessource(LIBRE) ) {
+                std::cout << "retour réussi" << std::endl;
+            } else {
+                std::cout << "retour impossible" << std::endl;
+            }
+        } else {
+            std::cout << "ID introuvable" << std::endl;
+        }
+
+    }
+}
+
+int searchID (std::vector <ressource *> * bib, unsigned int id){
+    if (id > 0) {
+        for ( unsigned int i = 0; i < bib->size() ; i++ ) {
+            if ( (* bib)[i] -> readID() == id) {
+                return i;
+            }
+        }
+    } else {
+        std::cout << "ID invalide" << std::endl;
+        return -1;
+    }
+    return -1;
 }
 
 void deleteID   (std::vector <ressource *> * bib, std::string cmd){

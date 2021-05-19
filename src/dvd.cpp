@@ -1,6 +1,7 @@
 #include "dvd.h"
 
 dvd::dvd (void) {
+    etatRessource = LIBRE;
     ID = 0;
     type = DVD;
     titre = std::string("(vide)");
@@ -11,6 +12,7 @@ dvd::dvd (void) {
 }
 
 dvd::dvd (unsigned int _ID) {
+    etatRessource = LIBRE;
     ID = _ID;
     type = DVD;
     titre = std::string("(vide)");

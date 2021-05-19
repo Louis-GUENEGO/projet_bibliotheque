@@ -2,6 +2,7 @@
 
 
 resnum::resnum (void) {
+    etatRessource = LIBRE;
     ID = 0;
     type = RESNUM;
     titre = std::string("(vide)");
@@ -12,6 +13,7 @@ resnum::resnum (void) {
 }
 
 resnum::resnum (unsigned int _ID) {
+    etatRessource = LIBRE;
     ID = _ID;
     type = RESNUM;
     titre = std::string("(vide)");

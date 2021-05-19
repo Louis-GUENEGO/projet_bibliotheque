@@ -9,27 +9,31 @@
 
     enum typeRessource {LIVRE, REVUE, CD, VHS, DVD, RESNUM};
 
+    enum typeEtatRessource {LIBRE, RESERVE, EMPRUNTE};
+
     class ressource {
 
         protected:
-            typeRessource type;
-            std::string   titre;
-            std::string   auteur;
-            unsigned int  ID;
+            typeEtatRessource etatRessource;
+            typeRessource     type;
+            std::string       titre;
+            std::string       auteur;
+            unsigned int      ID;
 
         public:
             ressource();
 
             // méthodes virtuelles communes
-            virtual void         setTitre   (std::string titre);
-            virtual void         setAuteur  (std::string auteur);
-            virtual void         info       (void);
-            virtual void         infoDetail (void);
-            virtual void         lecture    (std::ifstream * monFichier);
-            virtual void         save       (std::ofstream * monFichier);
-            virtual void         create     (void);
-            virtual char         search     (const std::string & str);
-            virtual unsigned int readID     (void);
+            virtual void         setTitre         (std::string titre);
+            virtual void         setAuteur        (std::string auteur);
+            virtual void         info             (void);
+            virtual void         infoDetail       (void);
+            virtual void         lecture          (std::ifstream * monFichier);
+            virtual void         save             (std::ofstream * monFichier);
+            virtual void         create           (void);
+            virtual char         search           (const std::string & str);
+            virtual unsigned int readID           (void);
+            virtual char         setEtatRessource (typeEtatRessource etatRessource);
 
 
             // méthodes virtuelles Livres

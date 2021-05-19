@@ -13,7 +13,7 @@ void ressource::setAuteur (std::string _auteur){
 }
 void ressource::info (void){
 
-    std::cout << "(" << ID << ") ";
+    std::cout << "(" << ID <<  ") ";
 
     switch (type){
         case LIVRE:
@@ -40,12 +40,43 @@ void ressource::info (void){
             std::cout << "Ressource numérique : ";
             break;
     }
-    std::cout << titre << ", de " << auteur << std::endl;
+    std::cout << titre << ", de " << auteur << " (";
+
+    switch (etatRessource) {
+        case LIBRE:
+            std::cout << "libre";
+            break;
+
+        case RESERVE:
+            std::cout << "réservé";
+            break;
+
+        case EMPRUNTE:
+            std::cout << "emprunté";
+            break;
+    }
+
+    std::cout << ")" << std::endl;
 }
 
 void ressource::infoDetail (void) {
 
     std::cout << "ID : " << ID << std::endl;
+
+    std::cout << "Etat : ";
+    switch (etatRessource) {
+        case LIBRE:
+            std::cout << "libre" << std::endl;
+            break;
+
+        case RESERVE:
+            std::cout << "réservé" << std::endl;
+            break;
+
+        case EMPRUNTE:
+            std::cout << "emprunté" << std::endl;
+            break;
+    }
 
     switch (type){
         case LIVRE:
@@ -132,6 +163,19 @@ char ressource::search (const std::string & str){
 
 unsigned int ressource::readID (void){
     return ID;
+}
+
+char ressource::setEtatRessource (typeEtatRessource _etatRessource){
+
+    if ( (etatRessource == LIBRE) || (_etatRessource == LIBRE) ) {
+        etatRessource = _etatRessource;
+        return 1;
+    } else if ( (etatRessource == RESERVE) && (_etatRessource == EMPRUNTE) ) {
+        etatRessource = _etatRessource;
+        return 1;
+    }
+
+    return 0;
 }
 
 // méthodes virtuelles communes (non implémentée dans ressource)

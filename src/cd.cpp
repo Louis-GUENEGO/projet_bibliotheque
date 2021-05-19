@@ -1,6 +1,7 @@
 #include "cd.h"
 
 cd::cd (void) {
+    etatRessource = LIBRE;
     ID = 0;
     type = CD;
     titre = std::string("(vide)");
@@ -11,6 +12,7 @@ cd::cd (void) {
 }
 
 cd::cd (unsigned int _ID) {
+    etatRessource = LIBRE;
     ID = _ID;
     type = CD;
     titre = std::string("(vide)");

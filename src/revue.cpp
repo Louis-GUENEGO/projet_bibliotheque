@@ -1,6 +1,7 @@
 #include "revue.h"
 
 revue::revue (void) {
+    etatRessource = LIBRE;
     ID = 0;
     type = REVUE;
     titre = std::string("(vide)");
@@ -14,6 +15,7 @@ revue::revue (void) {
 }
 
 revue::revue (unsigned int _ID) {
+    etatRessource = LIBRE;
     ID = _ID;
     type = REVUE;
     titre = std::string("(vide)");

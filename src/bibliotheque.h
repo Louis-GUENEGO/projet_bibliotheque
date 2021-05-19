@@ -32,8 +32,12 @@
     char login      (void);
     void showID     (std::vector <ressource *> * bib, std::string cmd);
     void deleteID   (std::vector <ressource *> * bib, std::string cmd);
+    void reserveID  (std::vector <ressource *> * bib, std::string cmd);
+    void borrowID   (std::vector <ressource *> * bib, std::string cmd);
+    void returnID   (std::vector <ressource *> * bib, std::string cmd);
 
     // fonctions auxiliaires
     char newIdFree  (std::vector <ressource *> * bib);
+    int searchID (std::vector <ressource *> * bib, unsigned int id);
 
 #endif

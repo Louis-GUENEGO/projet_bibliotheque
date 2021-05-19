@@ -1,6 +1,7 @@
 #include "vhs.h"
 
 vhs::vhs (void) {
+    etatRessource = LIBRE;
     ID = 0;
     type = VHS;
     titre = std::string("(vide)");
@@ -10,6 +11,7 @@ vhs::vhs (void) {
 }
 
 vhs::vhs (unsigned int _ID) {
+    etatRessource = LIBRE;
     ID = _ID;
     type = VHS;
     titre = std::string("(vide)");

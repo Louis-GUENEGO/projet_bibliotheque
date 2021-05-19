@@ -1,6 +1,7 @@
 #include "livre.h"
 
 livre::livre (void) {
+    etatRessource = LIBRE;
     ID = 0;
     type = LIVRE;
     titre = std::string("(vide)");
@@ -12,6 +13,7 @@ livre::livre (void) {
 }
 
 livre::livre (unsigned int _ID) {
+    etatRessource = LIBRE;
     ID = _ID;
     type = LIVRE;
     titre = std::string("(vide)");
