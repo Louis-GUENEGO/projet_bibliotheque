@@ -4,21 +4,24 @@
     #include "livre.h"
 
     class revue : public livre {
+
         protected:
-            std::string editeur;
+            std::string  editeur;
             unsigned int nbrArticles;
 
         public:
-            revue(void);
-            revue(unsigned int _ID);
+            revue (void);
+            revue (unsigned int _ID);
 
-            virtual void setEditeur (std::string editeur);
+            // Méthodes pour modifier les attributs
+            virtual void setEditeur     (std::string editeur);
             virtual void setNbrArticles (unsigned int nrbArticles);
 
-            virtual void infoDetail(void);
-            virtual void create (void);
-            virtual void save (std::ofstream * monFichier);
-            virtual char search (const std::string & str);
+            // Méthodes pour effectuer des actions
+            virtual void infoDetail (void);
+            virtual void create     (void);
+            virtual void save       (std::ofstream * monFichier);
+            virtual char search     (const std::string & str);
     };
 
 #endif

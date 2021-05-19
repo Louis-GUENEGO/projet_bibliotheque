@@ -4,24 +4,26 @@
     #include "ressource.h"
 
     class resnum : public ressource {
+        
         protected:
-            std::string format;
+            std::string  format;
             unsigned int taille;
-            std::string chemin;
+            std::string  chemin;
 
         public:
-            resnum(void);
-            resnum(unsigned int _ID);
+            resnum (void);
+            resnum (unsigned int _ID);
 
+            // Méthodes pour modifier les attributs
             virtual void setFormat (std::string format);
             virtual void setTaille (unsigned int taille);
             virtual void setChemin (std::string chemin);
-            virtual void infoDetail(void);
 
-            virtual void create (void);
-            virtual void save (std::ofstream * monFichier);
-
-            virtual char search (const std::string & str);
+            // Méthodes pour effectuer des actions
+            virtual void infoDetail (void);
+            virtual void create     (void);
+            virtual void save       (std::ofstream * monFichier);
+            virtual char search     (const std::string & str);
     };
 
 #endif

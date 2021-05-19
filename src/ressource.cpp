@@ -1,6 +1,8 @@
 #include "ressource.h"
 
-ressource::ressource (void) {}
+ressource::ressource (void) {
+    //vide
+}
 
 // méthodes virtuelles communes
 void ressource::setTitre (std::string _titre) {
@@ -116,15 +118,8 @@ void ressource::lecture (std::ifstream * monFichier){
         }
 
     } while( buff.size() > 0);
+}
 
-    return;
-}
-void ressource::create (void){
-    std::cout<< "/!\\ méthode non implémentée" << std::endl;
-}
-void ressource::save (std::ofstream * monFichier){
-    std::cout<< "/!\\ méthode non implémentée" << std::endl;
-}
 char ressource::search (const std::string & str){
     if (this->titre.find(str, 0) != std::string::npos) {
         return 1;
@@ -138,6 +133,16 @@ char ressource::search (const std::string & str){
 unsigned int ressource::readID (void){
     return ID;
 }
+
+// méthodes virtuelles communes (non implémentée dans ressource)
+void ressource::create (void){
+    std::cout<< "/!\\ méthode non implémentée" << std::endl;
+}
+void ressource::save (std::ofstream * monFichier){
+    std::cout<< "/!\\ méthode non implémentée" << std::endl;
+}
+
+
 
 
 
@@ -156,7 +161,7 @@ void ressource::setResume (std::string resume){
     std::cout<< "/!\\ méthode non implémentée" << std::endl;
 }
 
-// méthosdes virtueklles revues
+// méthodes virtuelles revues (non implémentée dans ressource)
 void ressource::setEditeur (std::string editeur){
     std::cout<< "/!\\ méthode non implémentée" << std::endl;
 }
@@ -164,7 +169,7 @@ void ressource::setNbrArticles (unsigned int nrbArticles){
     std::cout<< "/!\\ méthode non implémentée" << std::endl;
 }
 
-// vhs
+// méthodes virtuelles vhs (non implémentée dans ressource)
 void ressource::setMaisonProd (std::string maisonProd){
     std::cout<< "/!\\ méthode non implémentée" << std::endl;
 }
@@ -172,17 +177,17 @@ void ressource::setDuree (unsigned int duree){
     std::cout<< "/!\\ méthode non implémentée" << std::endl;
 }
 
-//CD
+// méthodes virtuelles CD (non implémentée dans ressource)
 void ressource::setNbrPiste (unsigned int nbrPistes){
     std::cout<< "/!\\ méthode non implémentée" << std::endl;
 }
 
-// dvd
+// méthodes virtuelles dvd (non implémentée dans ressource)
 void ressource::setNbrChapitres (unsigned int nbrChapitres){
     std::cout<< "/!\\ méthode non implémentée" << std::endl;
 }
 
-//renum
+// méthodes virtuelles renum (non implémentée dans ressource)
 void ressource::setFormat (std::string format){
     std::cout<< "/!\\ méthode non implémentée" << std::endl;
 }

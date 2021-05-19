@@ -1,53 +1,46 @@
 #include "revue.h"
 
-revue::revue(void){
+revue::revue (void) {
     ID = 0;
-
     type = REVUE;
-
     titre = std::string("(vide)");
     auteur = std::string("(vide)");
-
     annee = 0;
     nbrPages = 0;
     collection = std::string("(vide)");
     resume = std::string("(vide)");
-
     editeur = std::string("(vide)");
     nbrArticles = 0;
 }
 
-revue::revue(unsigned int _ID){
+revue::revue (unsigned int _ID) {
     ID = _ID;
-
     type = REVUE;
-
     titre = std::string("(vide)");
     auteur = std::string("(vide)");
-
     annee = 0;
     nbrPages = 0;
     collection = std::string("(vide)");
     resume = std::string("(vide)");
-
     editeur = std::string("(vide)");
     nbrArticles = 0;
 }
 
-void revue::setEditeur (std::string _editeur){
+void revue::setEditeur (std::string _editeur) {
     editeur = _editeur;
 }
-void revue::setNbrArticles (unsigned int _nbrArticles){
+
+void revue::setNbrArticles (unsigned int _nbrArticles) {
     nbrArticles = _nbrArticles;
 }
 
-void revue::infoDetail(void){
+void revue::infoDetail(void) {
     livre::infoDetail();
     std::cout << "Editeur : " << editeur << std::endl;
     std::cout << "Nombre d'articles : " << nbrArticles << std::endl;
 }
 
-void revue::create (void){
+void revue::create (void) {
     int bufint;
     std::string chaine;
 
@@ -83,12 +76,9 @@ void revue::create (void){
     if (bufint >= 0) {
         this->setNbrArticles(bufint);
     }
-
-    return;
-
 }
 
-void revue::save (std::ofstream * monFichier){
+void revue::save (std::ofstream * monFichier) {
 
     *monFichier << "type=revue"                          << "\n";
     *monFichier << "titre="      << this->titre          << "\n";
@@ -99,11 +89,9 @@ void revue::save (std::ofstream * monFichier){
     *monFichier << "annee="      << this->annee          << "\n";
     *monFichier << "editeur="    << this->editeur        << "\n";
     *monFichier << "nbrArticles="<< this->nbrArticles    << "\n";
-
-    return;
 }
 
-char revue::search (const std::string & str){
+char revue::search (const std::string & str) {
     if ( livre::search(str) ) {
         return 1;
     } else if (this->editeur.find(str, 0) != std::string::npos) {

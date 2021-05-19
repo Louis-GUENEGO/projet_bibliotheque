@@ -1,25 +1,19 @@
 #include "vhs.h"
 
-vhs::vhs(void){
+vhs::vhs (void) {
     ID = 0;
-
     type = VHS;
-
     titre = std::string("(vide)");
     auteur = std::string("(vide)");
-
     duree = 0;
     maisonProd = std::string("(vide)");
 }
 
-vhs::vhs(unsigned int _ID){
+vhs::vhs (unsigned int _ID) {
     ID = _ID;
-
     type = VHS;
-
     titre = std::string("(vide)");
     auteur = std::string("(vide)");
-
     duree = 0;
     maisonProd = std::string("(vide)");
 }
@@ -40,7 +34,7 @@ void vhs::infoDetail (void) {
     std::cout << "Maison de production : " << maisonProd << std::endl;
 }
 
-void vhs::create (void){
+void vhs::create (void) {
     int bufint;
     std::string chaine;
 
@@ -53,30 +47,24 @@ void vhs::create (void){
     std::cout << "Veuillez renseigner la maison de production de la VHS" << std::endl;
     getline (std::cin, chaine);
 	this->setMaisonProd(chaine);
-
     std::cout << "Veuillez renseigner la durée de la VHS" << std::endl;
     getline (std::cin, chaine);
     bufint = std::atoi(chaine.c_str());
     if (bufint >= 0) {
         this->setDuree(bufint);
     }
-
-    return;
-
 }
 
-void vhs::save (std::ofstream * monFichier){
+void vhs::save (std::ofstream * monFichier) {
 
     *monFichier << "type=vhs"                        << "\n";
     *monFichier << "titre="      << this->titre      << "\n";
     *monFichier << "auteur="     << this->auteur     << "\n";
     *monFichier << "duree="      << this->duree      << "\n";
     *monFichier << "maisonProd=" << this->maisonProd << "\n";
-
-    return;
 }
 
-char vhs::search (const std::string & str){
+char vhs::search (const std::string & str) {
 
     if ( ressource::search(str) ) {
         return 1;

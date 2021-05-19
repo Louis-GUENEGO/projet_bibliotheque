@@ -93,7 +93,7 @@ void ihm (void){
     return;
 }
 
-void afficheBib (std::vector <ressource *> * bib){
+void afficheBib (std::vector <ressource *> * bib) {
     std::cout << std::endl << bib->size() << " éléments dans la bibliothèque" << std::endl;
 
     for (unsigned int i = 0; i < bib->size() ; i++) {

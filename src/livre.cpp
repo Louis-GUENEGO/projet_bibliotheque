@@ -1,47 +1,44 @@
 #include "livre.h"
 
-livre::livre(void){
+livre::livre (void) {
     ID = 0;
-
     type = LIVRE;
-
     titre = std::string("(vide)");
     auteur = std::string("(vide)");
-
     annee = 0;
     nbrPages = 0;
     collection = std::string("(vide)");
     resume = std::string("(vide)");
 }
 
-livre::livre(unsigned int _ID) {
+livre::livre (unsigned int _ID) {
     ID = _ID;
-
     type = LIVRE;
-
     titre = std::string("(vide)");
     auteur = std::string("(vide)");
-
     annee = 0;
     nbrPages = 0;
     collection = std::string("(vide)");
     resume = std::string("(vide)");
 }
 
-void livre::setAnnee (int _annee){
+void livre::setAnnee (int _annee) {
     annee = _annee;
 }
-void livre::setNbrPages (unsigned int _nbrPages){
+
+void livre::setNbrPages (unsigned int _nbrPages) {
     nbrPages = _nbrPages;
 }
-void livre::setCollection (std::string _collection){
+
+void livre::setCollection (std::string _collection) {
     collection = _collection;
 }
-void livre::setResume (std::string _resume){
+
+void livre::setResume (std::string _resume) {
     resume = _resume;
 }
 
-void livre::infoDetail(void){
+void livre::infoDetail(void) {
     ressource::infoDetail();
 
     std::cout << "Année : " << annee << std::endl;
@@ -50,7 +47,7 @@ void livre::infoDetail(void){
     std::cout << "Resumée : " << resume << std::endl;
 }
 
-void livre::create (void){
+void livre::create (void) {
     int bufint;
     std::string chaine;
 
@@ -75,11 +72,9 @@ void livre::create (void){
     std::cout << "Veuillez renseigner le résumé du livre" << std::endl;
     getline (std::cin, chaine);
 	this->setResume(chaine);
-
-    return;
 }
 
-void livre::save (std::ofstream * monFichier){
+void livre::save (std::ofstream * monFichier) {
 
     *monFichier << "type=livre"                      << "\n";
     *monFichier << "titre="      << this->titre      << "\n";
@@ -88,11 +83,9 @@ void livre::save (std::ofstream * monFichier){
     *monFichier << "collection=" << this->collection << "\n";
     *monFichier << "nbrPages="   << this->nbrPages   << "\n";
     *monFichier << "annee="      << this->annee      << "\n";
-
-    return;
 }
 
-char livre::search (const std::string & str){
+char livre::search (const std::string & str) {
 
     if ( ressource::search(str) ) {
         return 1;
