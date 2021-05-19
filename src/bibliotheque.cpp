@@ -4,15 +4,13 @@ unsigned int IDgen;
 
 void ihm (void){
 
-    char logedIn = 0;
+    char logedIn = 0; // variable qui engeristre l'état admin ou client
 
-    std::vector <ressource *> bib;
+    std::vector <ressource *> bib; // bibliothèque
 
-    std::vector <ressource *> * bibsearchinter = &bib;
+    std::vector <ressource *> * bibsearch = &bib; // pointeur de la bibliothèque de recherche
 
-    std::vector <ressource *> * * bibsearch = &bibsearchinter;
-
-    std::string cmd;
+    std::string cmd; // buffer de la commande
 
     IDgen = 1;
 
@@ -24,6 +22,7 @@ void ihm (void){
     while (1) {
         getline (std::cin, cmd);
 
+        // Commandes clients
         if ( (cmd.compare(0,5,"LOGIN")==0) || (cmd.compare(0,5,"login")==0) ) {
             logedIn = login();
         } else if ( (cmd.compare(0,6,"LOGOUT")==0) || (cmd.compare(0,6,"logout")==0) ) {
@@ -34,15 +33,15 @@ void ihm (void){
                 std::cout << "recherche vide" << std::endl;
             } else {
                 std::string cmdbuff = cmd.substr(7,cmd.size()-7);
-                searchBib(&bib,bibsearch, cmdbuff);
+                searchBib(&bib, &bibsearch, cmdbuff);
             }
         } else if ( (cmd.compare(0,4,"LIST")==0) || (cmd.compare(0,4,"list")==0) ) {
-            afficheBib(* bibsearch);
+            afficheBib(bibsearch);
         } else if ( (cmd.compare(0,4,"SHOW")==0) || (cmd.compare(0,4,"show")==0) ) {
             showID(&bib, cmd);
         } else if ( (cmd.compare(0,5,"CLEAR")==0) || (cmd.compare(0,5,"clear")==0) ) {
-            (*bibsearch)->clear();
-            * bibsearch =  &bib;
+            bibsearch->clear();
+            bibsearch =  &bib;
             std::cout << "résultat de recherche réinitialisé" << std::endl;
         } else if ( (cmd.compare(0,6,"RELOAD")==0) || (cmd.compare(0,6,"reload")==0) ) {
             loadBib(&bib, DEFAULT_BIB_LOAD);
@@ -50,7 +49,7 @@ void ihm (void){
                 break;
         }
 
-        // commandes super user
+        // commandes admins (MDP admin)
         else if ( (cmd.compare(0,3,"ADD")==0) || (cmd.compare(0,3,"add")==0) ) {
             if (logedIn) {
                 addType(&bib, cmd);
@@ -225,7 +224,6 @@ void loadBib (std::vector <ressource *> * bib, std::string cmd) {
     }
 
     return;
-
 }
 
 void saveBib (std::vector <ressource *> * bib, std::string cmd) {
@@ -281,8 +279,6 @@ void searchBib (std::vector <ressource *> * bib, std::vector <ressource *> * * b
     std::cout << tmp->size() << " éléments trouvé" << std::endl;
 
     return;
-
-
 }
 
 
@@ -306,7 +302,6 @@ char newIdFree (std::vector <ressource *> * bib){
     }
 
     return 0;
-
 }
 
 void showID   (std::vector <ressource *> * bib, std::string cmd){
@@ -370,5 +365,4 @@ char login (void){
         std::cout << "conexion échouée" << std::endl;
         return 0;
     }
-
 }
